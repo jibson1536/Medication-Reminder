@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    rel="stylesheet"
+  >
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Med List</title>
+
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #fff;
+      color: #111;
+    }
+
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .page-header {
+      margin-top: 80px;
+      margin-bottom: 30px;
+    }
+
+    .page-header h1 {
+      font-weight: 700;
+    }
+
+    /* Search Bar */
+    .search-bar {
+      position: relative;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+    }
+
+    .search-bar input {
+      border-radius: 12px;
+      padding: 0.75rem 2.5rem;
+      width: 100%;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+      transition: border 0.2s ease;
+    }
+
+    .search-bar input:focus {
+      outline: none;
+      border-color: #0d6efd;
+    }
+
+    .search-bar i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #aaa;
+      font-size: 1.2rem;
+    }
+
+    /* Medication Card */
+    .med-card {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      padding: 1rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      transition: all 0.25s ease;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .med-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      background: radial-gradient(circle at center, transparent 60%, rgba(0,0,0,0.05));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .med-card:hover::before {
+      opacity: 1;
+    }
+
+    .med-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .med-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+
+    .med-card:hover .med-icon {
+      transform: scale(1.1);
+    }
+
+    .med-details h5 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .med-details small {
+      color: #999;
+      display: block;
+      margin-top: 2px;
+    }
+
+    .med-time {
+      color: #999;
+      font-size: 0.9rem;
+    }
+
+    /* Color Variants */
+    .icon-blue { background: #3b82f6; box-shadow: 0 0 0 rgba(59,130,246,0); }
+    .icon-green { background: #22c55e; box-shadow: 0 0 0 rgba(34,197,94,0); }
+    .icon-purple { background: #a855f7; box-shadow: 0 0 0 rgba(168,85,247,0); }
+    .icon-orange { background: #f97316; box-shadow: 0 0 0 rgba(249,115,22,0); }
+    .icon-pink { background: #ec4899; box-shadow: 0 0 0 rgba(236,72,153,0); }
+
+    /* Glowing hover animation */
+    .med-card:hover .icon-blue {
+      box-shadow: 0 0 15px 3px rgba(59,130,246,0.5);
+    }
+    .med-card:hover .icon-green {
+      box-shadow: 0 0 15px 3px rgba(34,197,94,0.5);
+    }
+    .med-card:hover .icon-purple {
+      box-shadow: 0 0 15px 3px rgba(168,85,247,0.5);
+    }
+    .med-card:hover .icon-orange {
+      box-shadow: 0 0 15px 3px rgba(249,115,22,0.5);
+    }
+    .med-card:hover .icon-pink {
+      box-shadow: 0 0 15px 3px rgba(236,72,153,0.5);
+    }
+
+    .med-card:hover {
+      transform: translateY(-4px);
+    }
+
+    /* Responsive */
+    @media (max-width: 576px) {
+      .med-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+      }
+      .med-time {
+        align-self: flex-end;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- 🔹 Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="#">Medication Reminder</a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="userflow.html">User Flow</a></li>
+          <li class="nav-item"><a class="nav-link" href="welcome.html">Welcome</a></li>
+          <li class="nav-item"><a class="nav-link" href="onboarding.html">Onboarding</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active" href="medlist.html">Med List</a></li>
+          <li class="nav-item"><a class="nav-link" href="details.html">Details</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+          <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔹 Page Content -->
+  <div class="container py-5">
+    <div class="page-header">
+      <h1 class="h3 fw-bold">My Medications</h1>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <i class="bi bi-search"></i>
+      <input type="text" id="searchInput" placeholder="Search medications...">
+    </div>
+
+    <!-- Medication List -->
+    <div id="medList">
+      <div class="med-card">
+        <div class="med-info">
+          <div class="med-icon icon-blue"><i class="bi bi-capsule"></i></div>
+          <div class="med-details">
+            <h5>Aspirin</h5>
+            <small>100mg • 2x daily</small>
+            <div class="med-time"><i class="bi bi-clock"></i> 08:00 AM • 08:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="med-card">
+        <div class="med-info">
+          <div class="med-icon icon-green"><i class="bi bi-capsule"></i></div>
+          <div class="med-details">
+            <h5>Metformin</h5>
+            <small>500mg • 3x daily</small>
+            <div class="med-time"><i class="bi bi-clock"></i> 08:00 AM • 02:00 PM • 08:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="med-card">
+        <div class="med-info">
+          <div class="med-icon icon-purple"><i class="bi bi-capsule"></i></div>
+          <div class="med-details">
+            <h5>Lisinopril</h5>
+            <small>10mg • 1x daily</small>
+            <div class="med-time"><i class="bi bi-clock"></i> 08:00 AM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="med-card">
+        <div class="med-info">
+          <div class="med-icon icon-orange"><i class="bi bi-capsule"></i></div>
+          <div class="med-details">
+            <h5>Atorvastatin</h5>
+            <small>20mg • 1x daily</small>
+            <div class="med-time"><i class="bi bi-clock"></i> 08:00 PM</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="med-card">
+        <div class="med-info">
+          <div class="med-icon icon-pink"><i class="bi bi-capsule"></i></div>
+          <div class="med-details">
+            <h5>Omeprazole</h5>
+            <small>20mg • 1x daily</small>
+            <div class="med-time"><i class="bi bi-clock"></i> 07:30 AM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS + Custom Script -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // 🔍 Live Search Filter
+    const searchInput = document.getElementById('searchInput');
+    const medCards = document.querySelectorAll('.med-card');
+
+    searchInput.addEventListener('keyup', () => {
+      const query = searchInput.value.toLowerCase();
+      medCards.forEach(card => {
+        const text = card.innerText.toLowerCase();
+        card.style.display = text.includes(query) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>
