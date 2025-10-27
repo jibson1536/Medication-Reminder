@@ -68,7 +68,7 @@
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
     }
 
-    /* Flow cards */
+    /* Flow steps */
     .flow-step {
       position: relative;
       background-color: #fff;
@@ -78,17 +78,21 @@
       margin: 2rem auto;
       max-width: 380px;
       transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    .flow-step.active {
-      background-color: #111;
+    .flow-step.active,
+    .flow-step:hover {
+      background: linear-gradient(135deg, #0d6efd, #007bff);
       color: #fff;
-      transform: scale(1.03);
+      transform: scale(1.04);
+      box-shadow: 0 8px 25px rgba(13, 110, 253, 0.3);
     }
 
     .flow-step h5 {
       font-weight: 700;
       margin-bottom: 0.3rem;
+      transition: color 0.3s;
     }
 
     .flow-step p {
@@ -111,19 +115,27 @@
       justify-content: center;
       border-radius: 50%;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+      transition: all 0.3s;
     }
 
-    .flow-step.active .step-number {
+    .flow-step.active .step-number,
+    .flow-step:hover .step-number {
       background: #111;
       color: #fff;
+      transform: scale(1.1);
     }
 
-    /* Arrow between steps */
+    /* Arrows */
     .flow-arrow {
       text-align: center;
       font-size: 1.5rem;
       color: #bbb;
       margin: 1rem 0;
+      transition: color 0.3s;
+    }
+
+    .flow-step:hover + .flow-arrow i {
+      color: #0d6efd;
     }
 
     @media (max-width: 768px) {
@@ -170,7 +182,7 @@
   </section>
 
   <!-- 🔹 Flow Diagram -->
-  <section class="flow-container">
+  <section class="flow-container" id="flowContainer">
     <div class="flow-step active">
       <div class="step-number">1</div>
       <h5>Welcome Screen</h5>
@@ -235,5 +247,18 @@
   </section>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Interactive flow: click to highlight a step
+    const steps = document.querySelectorAll(".flow-step");
+
+    steps.forEach(step => {
+      step.addEventListener("click", () => {
+        steps.forEach(s => s.classList.remove("active"));
+        step.classList.add("active");
+        step.scrollIntoView({ behavior: "smooth", block: "center" });
+      });
+    });
+  </script>
 </body>
 </html>
