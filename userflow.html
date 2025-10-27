@@ -1,25 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  >
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
-  <!-- Meta + Title -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Flow</title>
 
-  <!-- Your Custom Styles -->
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f9f9f9;
+      color: #111;
+      margin: 0;
+      padding-top: 90px; /* space for fixed navbar */
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: #fff !important;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      z-index: 1000;
+    }
+
+    .navbar-nav .nav-link {
+      font-weight: 500;
+      color: #333 !important;
+      margin: 0 8px;
+      transition: color 0.3s;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: #0d6efd !important;
+    }
+
+    .navbar-nav .active {
+      background-color: #000;
+      color: #fff !important;
+      border-radius: 6px;
+      padding: 6px 12px;
+    }
+
+    /* Header */
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .page-header h1 {
+      font-weight: 700;
+    }
+
+    .page-header p {
+      color: #aaa;
+      font-size: 1rem;
+    }
+
+    /* Flow container */
+    .flow-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem;
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    /* Flow cards */
+    .flow-step {
+      position: relative;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+      padding: 1.5rem 1.8rem;
+      margin: 2rem auto;
+      max-width: 380px;
+      transition: all 0.3s ease;
+    }
+
+    .flow-step.active {
+      background-color: #111;
+      color: #fff;
+      transform: scale(1.03);
+    }
+
+    .flow-step h5 {
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .flow-step p {
+      color: inherit;
+      opacity: 0.9;
+      margin: 0;
+    }
+
+    .flow-step .step-number {
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      background: #fff;
+      color: #111;
+      font-weight: 700;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    }
+
+    .flow-step.active .step-number {
+      background: #111;
+      color: #fff;
+    }
+
+    /* Arrow between steps */
+    .flow-arrow {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #bbb;
+      margin: 1rem 0;
+    }
+
+    @media (max-width: 768px) {
+      .flow-step {
+        max-width: 95%;
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-white">
-
-  <!-- 🔹 Responsive Navigation Bar -->
-  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+<body>
+  <!-- 🔹 Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm fixed-top py-3">
     <div class="container-fluid">
       <a class="navbar-brand fw-semibold" href="#">Medication Reminder</a>
 
@@ -30,15 +147,15 @@
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a class="nav-link" href="userflow.html">User Flow</a></li>
+          <li class="nav-item"><a class="nav-link active" href="userflow.html">User Flow</a></li>
           <li class="nav-item"><a class="nav-link" href="welcome.html">Welcome</a></li>
           <li class="nav-item"><a class="nav-link" href="onboarding.html">Onboarding</a></li>
           <li class="nav-item"><a class="nav-link" href="index.html">Login</a></li>
           <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
           <li class="nav-item"><a class="nav-link" href="addmed.html">Add Med</a></li>
           <li class="nav-item"><a class="nav-link" href="medlist.html">Med List</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="reminder.html">Reminder</a></li>
           <li class="nav-item"><a class="nav-link" href="details.html">Details</a></li>
+          <li class="nav-item"><a class="nav-link" href="reminder.html">Reminder</a></li>
           <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
           <li class="nav-item"><a class="nav-link" href="profile.html">Profile</a></li>
         </ul>
@@ -46,14 +163,77 @@
     </div>
   </nav>
 
-  <!-- 🔹 Page Content Section -->
-  <div class="container py-5">
-    <h1 class="h3">User Flow</h1>
-    <p class="text-muted">This is the content for the User Flow page.</p>
-  </div>
+  <!-- 🔹 Page Header -->
+  <section class="page-header">
+    <h1>Medicine Prescription Reminder</h1>
+    <p>User Flow Diagram - 9 Core Features</p>
+  </section>
 
-  <!-- Bootstrap JS + Custom Script -->
+  <!-- 🔹 Flow Diagram -->
+  <section class="flow-container">
+    <div class="flow-step active">
+      <div class="step-number">1</div>
+      <h5>Welcome Screen</h5>
+      <p>App launch & splash</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">2</div>
+      <h5>Onboarding</h5>
+      <p>Feature explanations</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">3</div>
+      <h5>Sign Up / Login</h5>
+      <p>User authentication</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">4</div>
+      <h5>Dashboard</h5>
+      <p>Today's medications & quick actions</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">5</div>
+      <h5>Add Medication</h5>
+      <p>Create new prescription entries</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">6</div>
+      <h5>Medication List</h5>
+      <p>Browse all medications</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">7</div>
+      <h5>Medication Details</h5>
+      <p>View and manage medication info</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">8</div>
+      <h5>Reminder Notification</h5>
+      <p>Alert when it's time to take medicine</p>
+    </div>
+    <div class="flow-arrow"><i class="bi bi-arrow-down"></i></div>
+
+    <div class="flow-step">
+      <div class="step-number">9</div>
+      <h5>History</h5>
+      <p>Track adherence over time</p>
+    </div>
+  </section>
+
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="script.js"></script>
 </body>
 </html>
