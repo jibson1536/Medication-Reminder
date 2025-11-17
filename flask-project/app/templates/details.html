@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medication Details - Med Reminder</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="details.css">
+</head>
+
+<body>
+
+    <!-- BLUE HEADER -->
+    <header class="details-header">
+        <a href="medlist.html" class="back-btn"><i class="bi bi-arrow-left"></i></a>
+        <h4 class="header-title">Medication Details</h4>
+    </header>
+
+    <main class="container details-wrapper">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary px-3">
+            <a class="navbar-brand text-white fw-bold" href="welcome.html">Med Reminder</a>
+        
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+                <i class="bi bi-list text-white fs-1"></i>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="menu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link text-white" href="dashboard.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="medlist.html">Med List</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+
+        <!-- Top card -->
+        <div class="med-top-card">
+            <div class="d-flex align-items-center gap-3">
+                <div class="med-icon">
+                    <i class="bi bi-capsule"></i>
+                </div>
+
+                <div>
+                    <h5 class="med-title">Medication Name</h5>
+                    <p class="med-subtitle">100mg • Tablet</p>
+                </div>
+            </div>
+
+            <!-- Buttons Row -->
+            <div class="row mt-3">
+                <div class="col-6">
+                    <button class="action-btn edit-btn" onclick="editMedication()"> 
+                        <i class="bi bi-pencil"></i> Edit
+                    </button>
+                </div>
+
+                <div class="col-6">
+                    <button class="action-btn delete-btn" onclick="deleteMedication()">
+                        <i class="bi bi-trash"></i> Delete
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Schedule Section -->
+        <section class="info-card">
+            <div class="d-flex justify-content-between">
+                <h6 class="section-title"><i class="bi bi-clock"></i> Schedule</h6>
+                <span class="section-value">2 times daily</span>
+            </div>
+
+            <div class="times-row mt-2">
+                <span class="time-pill">08:00 AM</span>
+                <span class="time-pill">08:00 PM</span>
+            </div>
+        </section>
+
+        <!-- Duration Section -->
+        <section class="info-card">
+            <h6 class="section-title"><i class="bi bi-calendar"></i> Duration</h6>
+
+            <div class="duration-row">
+                <span class="duration-label">Start Date</span>
+                <span class="duration-value">Jan 1, 2025</span>
+            </div>
+
+            <div class="duration-row">
+                <span class="duration-label">End Date</span>
+                <span class="duration-value">Ongoing</span>
+            </div>
+        </section>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="details.js"></script>
+</body>
+</html>

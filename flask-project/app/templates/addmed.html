@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Medication - Med Reminder</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body class="bg-white">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg px-3 universal-nav">
+        <a class="navbar-brand fw-bold" href="dashboard.html">Med Reminder</a>
+    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+                <li class="nav-item"><a class="nav-link" href="addmed.html">Add Med</a></li>
+            </ul>
+        </div>
+    </nav>
+    <!-- MAIN CONTENT -->
+    <main class="addmed-wrapper container">
+
+        <!-- Header -->
+        <div class="d-flex align-items-center gap-3 addmed-header">
+            <a href="dashboard.html" class="back-btn">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h3 class="mb-0">Add Medication</h3>
+        </div>
+
+        <!-- FORM -->
+        <form class="addmed-form">
+
+            <!-- Medication name -->
+            <div class="addmed-section">
+                <label class="form-section-label">Medication Name</label>
+                <input type="text" class="form-control field-input" placeholder="e.g., Aspirin">
+            </div>
+
+            <!-- Dosage -->
+            <div class="addmed-section">
+                <label class="form-section-label">Dosage</label>
+                <div class="row g-3">
+                    <div class="col-md-8">
+                        <input type="number" class="form-control field-input" placeholder="Amount">
+                    </div>
+                    <div class="col-md-4">
+                        <select class="form-select field-input">
+                            <option selected>mg</option>
+                            <option>ml</option>
+                            <option>g</option>
+                            <option>mcg</option>
+                            <option>units</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Type -->
+            <div class="addmed-section">
+                <label class="form-section-label">Type</label>
+                <div class="pill-options">
+                    <button type="button" class="pill-option active">Tablet</button>
+                    <button type="button" class="pill-option">Capsule</button>
+                    <button type="button" class="pill-option">Liquid</button>
+                </div>
+
+                <div class="pill-options mt-2">
+                    <button type="button" class="pill-option">Injection</button>
+                    <button type="button" class="pill-option">Inhaler</button>
+                    <button type="button" class="pill-option">Other</button>
+                </div>
+            </div>
+
+            <!-- Frequency -->
+            <div class="addmed-section">
+                <label class="form-section-label">Frequency</label>
+                <div class="pill-options">
+                    <button type="button" class="pill-option active">Daily</button>
+                    <button type="button" class="pill-option">Weekly</button>
+                    <button type="button" class="pill-option">As Needed</button>
+                </div>
+            </div>
+
+            <!-- Times per day -->
+            <div class="addmed-section">
+                <label class="form-section-label">Times per day</label>
+                <div class="pill-options">
+                    <button type="button" class="pill-option active">1x</button>
+                    <button type="button" class="pill-option">2x</button>
+                    <button type="button" class="pill-option">3x</button>
+                    <button type="button" class="pill-option">4x</button>
+                </div>
+            </div>
+
+            <!-- Reminder Time -->
+            <div class="addmed-section">
+                <label class="form-section-label">Reminder Times</label>
+                <input type="time" class="form-control field-input" value="08:00">
+            </div>
+
+            <!-- Save button -->
+            <div class="addmed-section text-end mt-4">
+                <button type="submit" class="btn sign-btn px-5">Save Medication</button>
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- JavaScript Redirect -->
+    <script>
+        document.querySelector(".addmed-form").addEventListener("submit", function(e) {
+            e.preventDefault(); 
+            window.location.href = "dashboard.html";
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

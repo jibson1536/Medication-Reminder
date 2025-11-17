@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Med Reminder</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <link rel="stylesheet" href="history.css">
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg px-3 universal-nav">
+        <a class="navbar-brand fw-bold" href="dashboard.html">Med Reminder</a>
+    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+                <li class="nav-item"><a class="nav-link" href="addmed.html">Add Med</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+
+    <!-- PAGE WRAPPER -->
+    <main class="container py-4">
+
+        <!-- Back Arrow -->
+        <a href="dashboard.html" class="back-link">
+            <i class="bi bi-arrow-left"></i>
+            History
+        </a>
+
+
+        <!-- WEEK SUMMARY CARD -->
+        <div class="week-summary shadow-sm">
+            <div class="summary-title">This Week</div>
+
+            <div class="summary-grid">
+                <div>
+                    <div class="summary-number">92%</div>
+                    <div class="summary-label">Adherence</div>
+                </div>
+                <div>
+                    <div class="summary-number">23</div>
+                    <div class="summary-label">Taken</div>
+                </div>
+                <div>
+                    <div class="summary-number">2</div>
+                    <div class="summary-label">Missed</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- TODAY -->
+        <div class="day-section">
+            <div class="day-title">Today, Jan 7</div>
+
+            <!-- Example entry -->
+            <div class="history-card shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="med-info">
+                        <div class="med-name">Aspirin</div>
+                        <div class="med-details">100mg • 08:00 AM</div>
+                    </div>
+                </div>
+                <span class="status taken">Taken</span>
+            </div>
+
+            <div class="history-card shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="med-info">
+                        <div class="med-name">Metformin</div>
+                        <div class="med-details">500mg • 12:00 PM</div>
+                    </div>
+                </div>
+                <span class="status taken">Taken</span>
+            </div>
+
+            <div class="history-card shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hist-icon missed"><i class="bi bi-x-circle-fill"></i></div>
+                    <div class="med-info">
+                        <div class="med-name">Lisinopril</div>
+                        <div class="med-details">10mg • 02:00 PM</div>
+                    </div>
+                </div>
+                <span class="status missed">Missed</span>
+            </div>
+        </div>
+
+
+        <!-- YESTERDAY -->
+        <div class="day-section">
+            <div class="day-title">Yesterday, Jan 6</div>
+
+            <div class="history-card shadow-sm">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
+                    <div class="med-info">
+                        <div class="med-name">Aspirin</div>
+                        <div class="med-details">100mg • 08:00 AM</div>
+                    </div>
+                </div>
+                <span class="status taken">Taken</span>
+            </div>
+        </div>
+
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="history.js"></script>
+</body>
+</html>
