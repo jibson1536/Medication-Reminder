@@ -1,0 +1,61 @@
+/* Page Title */
+.page-title {
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+.page-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+}
+
+/* WEEK ROW */
+.week-row {
+    background: #eef5ff;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.day-box {
+    flex: 1;
+    padding: 10px 0;
+    border-radius: 12px;
+    color: #0d6efd;
+    cursor: pointer;
+}
+
+.day-box.active {
+    background: #0d6efd;
+    color: white;
+}
+
+/* DAY + DATE */
+.day {
+    display: block;
+    font-size: 14px;
+}
+
+.date {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* MEDICATION ITEMS */
+.schedule-card {
+    border: 1px solid #e2e6ea;
+    border-radius: 12px;
+    padding: 15px 18px;
+    margin-bottom: 15px;
+    background: #fff;
+}
+
+.med-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: #000;
+}
+
+.med-meta {
+    font-size: 13px;
+    color: #6c757d;
+}

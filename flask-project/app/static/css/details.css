@@ -1,0 +1,142 @@
+/* BLUE HEADER */
+.details-header {
+    background: #0094ff;
+    padding: 18px 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.details-header .back-btn {
+    color: white;
+    font-size: 22px;
+}
+
+.header-title {
+    color: white;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* MAIN WRAPPER */
+.details-wrapper {
+    padding-top: 25px;
+}
+
+/* TOP CARD */
+.med-top-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.med-icon {
+    width: 55px;
+    height: 55px;
+    border-radius: 12px;
+    background: #e9f4ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #0094ff;
+}
+
+.med-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.med-subtitle {
+    color: #666;
+    margin: 0;
+}
+
+/* ACTION BUTTONS */
+.action-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.edit-btn {
+    background: #f1f5ff;
+    color: #0059c7;
+}
+
+.delete-btn {
+    background: #ffeaea;
+    color: #c70000;
+}
+
+/* INFO CARDS */
+.info-card {
+    background: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.section-title {
+    font-weight: 600;
+}
+
+.section-value {
+    color: #444;
+}
+
+/* TIMES */
+.times-row {
+    display: flex;
+    gap: 15px;
+}
+
+.time-pill {
+    background: #f4f4f4;
+    padding: 7px 15px;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+/* DURATION ROWS */
+.duration-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+}
+
+.duration-label {
+    color: #555;
+}
+
+.duration-value {
+    font-weight: 500;
+}
+
+.navbar-toggler {
+    background: transparent !important;
+}
+
+.navbar-toggler:hover i {
+    opacity: 0.7;
+    transition: 0.2s ease;
+}
+
+.navbar-nav .nav-link {
+    font-weight: 500;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.navbar-nav .nav-link:hover {
+    opacity: 0.7;
+}
+
+body {
+    padding-top: 70px !important; /* same as Dashboard */
+}
