@@ -8,33 +8,37 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Bootstrap Icons (important!) -->
+    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-    <!-- Your CSS -->
-    <link rel="stylesheet" href="index.css">
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
 <body class="bg-white">
-
-    <!-- NAV -->
     <nav class="navbar navbar-expand-lg bg-white shadow-sm px-3">
-        <a class="navbar-brand fw-bold" href="welcome.html">Med Reminder</a>
-      
+        <a class="navbar-brand fw-bold" href="{{ url_for('auth_bp.welcome') }}">
+            Med Reminder
+        </a>
+    
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-      
+    
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="welcome.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="features.html">Features</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('auth_bp.welcome') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('profile_bp.features') }}">Features</a>
+                </li>
             </ul>
         </div>
-      </nav>
-      
+    </nav>
+    
 
-    <!-- LOGIN -->
+    <!-- LOGIN WRAPPER -->
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="text-center login-wrapper">
 
@@ -46,9 +50,10 @@
             <h2 class="title mb-1">Welcome Back</h2>
             <p class="subtitle mb-4">Sign in to continue</p>
 
-            <!-- CARD -->
+            <!-- LOGIN CARD -->
             <div class="card login-card shadow-sm p-4">
                 <form>
+
                     <div class="mb-3 text-start">
                         <label class="form-label field-label">Email</label>
                         <input type="email" class="form-control field-input" placeholder="you@example.com">
@@ -64,18 +69,19 @@
                     </div>
 
                     <button class="btn btn-dark w-100 sign-btn">Sign In</button>
+
                 </form>
             </div>
 
             <p class="signup-text mt-4">
                 Don't have an account?
-                <a href="signup.html" class="signup-link fw-semibold">Sign up</a>
+                <a href="{{ url_for('auth_bp.signup') }}" class="signup-link fw-semibold">Sign up</a>
             </p>
 
         </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>
-

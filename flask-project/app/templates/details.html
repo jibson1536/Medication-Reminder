@@ -12,20 +12,27 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="details.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/details.css') }}">
 </head>
 
 <body>
 
     <!-- BLUE HEADER -->
     <header class="details-header">
-        <a href="medlist.html" class="back-btn"><i class="bi bi-arrow-left"></i></a>
+        <a href="{{ url_for('med_bp.medlist') }}" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+        </a>
         <h4 class="header-title">Medication Details</h4>
     </header>
 
     <main class="container details-wrapper">
+
+        <!-- NAVBAR INSIDE PAGE (kept as is) -->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-primary px-3">
-            <a class="navbar-brand text-white fw-bold" href="welcome.html">Med Reminder</a>
+            <a class="navbar-brand text-white fw-bold" href="{{ url_for('auth_bp.welcome') }}">
+                Med Reminder
+            </a>
         
             <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
                 <i class="bi bi-list text-white fs-1"></i>
@@ -33,12 +40,16 @@
         
             <div class="collapse navbar-collapse" id="menu">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link text-white" href="dashboard.html">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="medlist.html">Med List</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" href="{{ url_for('med_bp.medlist') }}">Med List</a>
+                    </li>
                 </ul>
             </div>
         </nav>
-        
 
         <!-- Top card -->
         <div class="med-top-card">
@@ -98,7 +109,8 @@
         </section>
 
     </main>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="details.js"></script>
+    <script src="{{ url_for('static', filename='js/details.js') }}"></script>
 </body>
 </html>
