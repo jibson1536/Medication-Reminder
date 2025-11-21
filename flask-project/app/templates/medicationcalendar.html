@@ -96,29 +96,22 @@
             <!-- Continue full month as needed -->
         </div>
 
-        <!-- MED LIST FOR SELECTED DAY -->
         <div class="day-details mt-4 p-3 rounded shadow-sm bg-white">
-            <h5 class="fw-semibold mb-3">Medications for Jan 1</h5>
-
-            <div class="med-item d-flex justify-content-between align-items-center">
-                <div>
-                    <strong>Aspirin</strong><br>
-                    <small>100mg · 08:00 AM</small>
-                </div>
-                <span class="badge bg-success">Taken</span>
-            </div>
-
+            <h5 class="fw-semibold mb-3">Medications (Dummy Day)</h5>
+        
+            {% for med in schedule[0].meds %}
             <div class="med-item d-flex justify-content-between align-items-center mt-3">
                 <div>
-                    <strong>Lisinopril</strong><br>
-                    <small>10mg · 02:00 PM</small>
+                    <strong>{{ med.name }}</strong><br>
+                    <small>{{ med.dose }} · {{ med.time }}</small>
                 </div>
-                <span class="badge bg-danger">Missed</span>
+                <span class="badge {% if med.status == 'Taken' %}bg-success{% elif med.status == 'Missed' %}bg-danger{% else %}bg-secondary{% endif %}">
+                    {{ med.status }}
+                </span>
             </div>
-
+            {% endfor %}
         </div>
-
-    </div>
+        
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
