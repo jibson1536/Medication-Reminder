@@ -32,7 +32,6 @@ def features():
 
 
 # -------- JSON API for history ----------
-
 @profile_bp.route('/api/history')
 def api_history():
     return jsonify(HISTORY_ITEMS)

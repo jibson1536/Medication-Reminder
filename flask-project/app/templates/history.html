@@ -45,6 +45,7 @@
     <main class="container py-4">
 
         <!-- BACK LINK -->
+         
         <a href="{{ url_for('med_bp.dashboard') }}" class="back-link">
             <i class="bi bi-arrow-left"></i> History
         </a>
@@ -69,62 +70,31 @@
             </div>
         </div>
 
+<!-- TODAY -->
+<div class="day-section">
+    <div class="day-title">Today</div>
 
-        <!-- TODAY -->
-        <div class="day-section">
-            <div class="day-title">Today, Jan 7</div>
-
-            <!-- Example entry -->
-            <div class="history-card shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
-                    <div class="med-info">
-                        <div class="med-name">Aspirin</div>
-                        <div class="med-details">100mg • 08:00 AM</div>
-                    </div>
-                </div>
-                <span class="status taken">Taken</span>
+    {% for item in history %}
+    <div class="history-card shadow-sm">
+        <div class="d-flex align-items-center gap-3">
+            <div class="hist-icon {{ item.status|lower }}">
+                {% if item.status == 'Taken' %}
+                    <i class="bi bi-check-circle-fill"></i>
+                {% else %}
+                    <i class="bi bi-x-circle-fill"></i>
+                {% endif %}
             </div>
 
-            <div class="history-card shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
-                    <div class="med-info">
-                        <div class="med-name">Metformin</div>
-                        <div class="med-details">500mg • 12:00 PM</div>
-                    </div>
-                </div>
-                <span class="status taken">Taken</span>
-            </div>
-
-            <div class="history-card shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="hist-icon missed"><i class="bi bi-x-circle-fill"></i></div>
-                    <div class="med-info">
-                        <div class="med-name">Lisinopril</div>
-                        <div class="med-details">10mg • 02:00 PM</div>
-                    </div>
-                </div>
-                <span class="status missed">Missed</span>
+            <div class="med-info">
+                <div class="med-name">{{ item.name }}</div>
+                <div class="med-details">{{ item.dose }} • {{ item.time }}</div>
             </div>
         </div>
 
-
-        <!-- YESTERDAY -->
-        <div class="day-section">
-            <div class="day-title">Yesterday, Jan 6</div>
-
-            <div class="history-card shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="hist-icon taken"><i class="bi bi-check-circle-fill"></i></div>
-                    <div class="med-info">
-                        <div class="med-name">Aspirin</div>
-                        <div class="med-details">100mg • 08:00 AM</div>
-                    </div>
-                </div>
-                <span class="status taken">Taken</span>
-            </div>
-        </div>
+        <span class="status {{ item.status|lower }}">{{ item.status }}</span>
+    </div>
+    {% endfor %}
+</div>
 
     </main>
 

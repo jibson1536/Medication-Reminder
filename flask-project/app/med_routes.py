@@ -31,15 +31,19 @@ def dashboard():
                            meds=DUMMY_MEDS)
 
 
+@med_bp.route('/api/meds')
+def api_meds():
+    return jsonify(DUMMY_MEDS)
+
 @med_bp.route('/addmed')
 def addmed():
     return render_template('addmed.html')
 
-
-@med_bp.route('/editmed')
-def editmed():
-    # Just reuse first med as “being edited”
-    med = DUMMY_MEDS[0]
+@med_bp.route('/editmed/<int:med_id>')
+def editmed(med_id):
+    med = next((m for m in DUMMY_MEDS if m["id"] == med_id), None)
+    if not med:
+        return "Medication not found", 404
     return render_template('editmed.html', med=med)
 
 
@@ -48,11 +52,11 @@ def medlist():
     return render_template('medlist.html', meds=DUMMY_MEDS)
 
 
-@med_bp.route('/details')
-def details():
-    # Show details for first med only (dummy)
-    med = DUMMY_MEDS[0]
+@med_bp.route('/details/<int:med_id>')
+def details(med_id):
+    med = next((m for m in DUMMY_MEDS if m["id"] == med_id), None)
     return render_template('details.html', med=med)
+
 
 
 @med_bp.route('/medication')
@@ -63,9 +67,11 @@ def medication():
 
 # -------- JSON API endpoints (for JS fetch) ----------
 
-@med_bp.route('/api/meds')
-def api_meds():
-    return jsonify(DUMMY_MEDS)
+@med_bp.route('/api/med/<int:med_id>')
+def api_med(med_id):
+    med = next((m for m in DUMMY_MEDS if m["id"] == med_id), None)
+    return jsonify(med)
+
 
 
 @med_bp.route('/api/dashboard')
