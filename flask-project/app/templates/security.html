@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Settings - Med Reminder</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+    <!-- Security CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/security.css') }}">
+</head>
+
+<body class="bg-white">
+
+    <!-- UNIVERSAL NAVBAR (Logged-in pages) -->
+    <nav class="navbar navbar-expand-lg px-3 universal-nav">
+        <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">
+            Med Reminder
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
+
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
+
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('settings_bp.security') }}">Security</a></li>
+
+            </ul>
+        </div>
+    </nav>
+
+    <!-- MAIN WRAPPER -->
+    <main class="container settings-wrapper">
+
+        <!-- Header -->
+        <div class="settings-header">
+            <h3>Security Settings</h3>
+            <p class="text-muted">Manage your password and account security</p>
+        </div>
+
+        <!-- Change Password -->
+        <div class="settings-card p-4 mb-4">
+            <h5 class="mb-3">Change Password</h5>
+
+            <form id="passwordForm">
+
+                <div class="mb-3">
+                    <label class="form-label">Current Password</label>
+                    <input type="password" class="form-control settings-input" placeholder="Enter current password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">New Password</label>
+                    <input type="password" class="form-control settings-input" placeholder="Enter new password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Confirm New Password</label>
+                    <input type="password" class="form-control settings-input" placeholder="Re-enter new password" required>
+                </div>
+
+                <button type="submit" class="btn sign-btn w-100 mt-2">Save Password</button>
+            </form>
+        </div>
+
+        <!-- Additional Security Options -->
+        <div class="settings-card p-4 mb-5">
+            <h5 class="mb-3">Other Security Options</h5>
+
+            <a href="#" class="settings-row">
+                <span>Two-Factor Authentication</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+            <a href="#" class="settings-row">
+                <span>Login Activity</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+
+            <a href="#" class="settings-row">
+                <span>Connected Devices</span>
+                <i class="bi bi-chevron-right"></i>
+            </a>
+        </div>
+
+        <!-- Logout -->
+        <div class="text-center">
+            <a href="{{ url_for('auth_bp.login') }}" class="btn btn-danger px-5 py-2 rounded-pill">Log Out</a>
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Mock password update -->
+    <script>
+        document.getElementById("passwordForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            alert("Password updated successfully!");
+            window.location.href = "{{ url_for('med_bp.dashboard') }}";
+        });
+    </script>
+
+</body>
+</html>

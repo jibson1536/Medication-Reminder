@@ -1,0 +1,60 @@
+/* Onboarding Icons */
+.onboard-icon {
+    font-size: 70px;
+    color: #000;
+    margin-bottom: 40px;
+}
+
+/* Titles & Text */
+.onboard-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #000;
+}
+
+.onboard-sub {
+    font-size: 15px;
+    color: #aaa;
+    max-width: 300px;
+    margin: 0 auto;
+}
+
+/* Pagination Dots */
+.dots {
+    margin: 30px 0;
+}
+
+.dot-active {
+    width: 30px;
+    height: 8px;
+    background: #000;
+    border-radius: 10px;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #ddd;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 4px;
+}
+
+/* Onboarding Buttons */
+.btn-white {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 25px;
+    padding: 12px 40px;
+    font-size: 15px;
+}
+
+.btn-dark {
+    background: #000;
+    color: #fff;
+    border-radius: 25px;
+    padding: 12px 40px;
+    font-size: 15px;
+}

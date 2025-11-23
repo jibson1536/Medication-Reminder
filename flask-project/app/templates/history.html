@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History - Med Reminder</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+    <!-- Page CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+
+</head>
+
+<body class="bg-light">
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg px-3 universal-nav">
+        <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">
+            Med Reminder
+        </a>
+    
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('profile_bp.history') }}">History</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.profile') }}">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- PAGE WRAPPER -->
+    <main class="container py-4">
+
+        <!-- BACK LINK -->
+         
+        <a href="{{ url_for('med_bp.dashboard') }}" class="back-link">
+            <i class="bi bi-arrow-left"></i> History
+        </a>
+
+        <!-- WEEK SUMMARY -->
+        <div class="week-summary shadow-sm">
+            <div class="summary-title">This Week</div>
+
+            <div class="summary-grid">
+                <div>
+                    <div class="summary-number">92%</div>
+                    <div class="summary-label">Adherence</div>
+                </div>
+                <div>
+                    <div class="summary-number">23</div>
+                    <div class="summary-label">Taken</div>
+                </div>
+                <div>
+                    <div class="summary-number">2</div>
+                    <div class="summary-label">Missed</div>
+                </div>
+            </div>
+        </div>
+
+<!-- TODAY -->
+<div class="day-section">
+    <div class="day-title">Today</div>
+
+    {% for item in history %}
+    <div class="history-card shadow-sm">
+        <div class="d-flex align-items-center gap-3">
+            <div class="hist-icon {{ item.status|lower }}">
+                {% if item.status == 'Taken' %}
+                    <i class="bi bi-check-circle-fill"></i>
+                {% else %}
+                    <i class="bi bi-x-circle-fill"></i>
+                {% endif %}
+            </div>
+
+            <div class="med-info">
+                <div class="med-name">{{ item.name }}</div>
+                <div class="med-details">{{ item.dose }} • {{ item.time }}</div>
+            </div>
+        </div>
+
+        <span class="status {{ item.status|lower }}">{{ item.status }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/history.js') }}"></script>
+
+</body>
+</html>

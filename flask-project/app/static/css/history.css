@@ -1,0 +1,112 @@
+/* Blue top bar */
+.top-nav {
+    background: #007bff;
+}
+
+/* Back link */
+.back-link {
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 18px;
+    text-decoration: none;
+    margin-bottom: 20px;
+}
+
+/* Week Summary Card */
+.week-summary {
+    background: linear-gradient(to bottom right, #0059d6, #9fbaff);
+    color: white;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.summary-title {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.summary-grid {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.summary-number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.summary-label {
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* Day sections */
+.day-title {
+    font-weight: bold;
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+/* History Cards */
+.history-card {
+    background: white;
+    border-radius: 14px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.hist-icon i {
+    font-size: 24px;
+}
+
+.hist-icon.taken i {
+    color: #28a745;
+}
+
+.hist-icon.missed i {
+    color: #dc3545;
+}
+
+.med-name {
+    font-weight: 600;
+}
+
+.med-details {
+    font-size: 13px;
+    color: #555;
+}
+
+/* Status pill */
+.status {
+    font-size: 13px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+.status.taken {
+    background: #d8f7dd;
+    color: #1b7a31;
+}
+
+.status.missed {
+    background: #fcd7d7;
+    color: #c02d2d;
+}
+
+/* Toggle (three dots) hover button */
+.nav-toggle {
+    border: none;
+    background: none;
+}
+
+.nav-toggle:hover i {
+    opacity: 0.75;
+    cursor: pointer;
+}

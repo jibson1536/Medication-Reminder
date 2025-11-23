@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Medication - Med Reminder</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body class="bg-white">
+
+    <nav class="navbar navbar-expand-lg px-3 universal-nav">
+        <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">
+            Med Reminder
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
+                <!-- REMOVED BROKEN EDIT LINK -->
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.profile') }}">Profile</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="addmed-wrapper container">
+
+        <!-- Header -->
+        <div class="d-flex align-items-center gap-3 addmed-header">
+            <a href="{{ url_for('med_bp.details', med_id=med.id) }}" class="back-btn">
+                <i class="bi bi-arrow-left"></i>
+            </a>
+            <h3 class="mb-0">Edit Medication</h3>
+        </div>
+
+        <!-- FORM -->
+        <input type="text" id="med-name" class="form-control field-input" value="{{ med.name }}">
+        <input type="number" id="med-dose" class="form-control field-input" value="{{ med.dose | replace('mg', '') }}">
+        
+        <select id="med-unit" class="form-select field-input">
+            <option {% if 'mg' in med.dose %}selected{% endif %}>mg</option>
+            <option {% if 'ml' in med.dose %}selected{% endif %}>ml</option>
+            <option {% if 'g' in med.dose %}selected{% endif %}>g</option>
+        </select>
+        
+        <input type="time" id="med-time" class="form-control field-input" value="08:00">
+        
+        <input type="hidden" id="med-id" value="{{ med.id }}">
+        
+        <button type="button" id="delete-btn" class="btn btn-outline-danger px-4">Delete</button>
+        <button type="button" id="save-btn" class="btn sign-btn px-5">Update</button>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ url_for('static', filename='js/editmed.js') }}"></script>
+
+</body>
+</html>

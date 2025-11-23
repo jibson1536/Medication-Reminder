@@ -1,0 +1,68 @@
+/* Universal Navbar Blue Theme */
+.universal-nav {
+    background: #007bff;
+}
+.universal-nav .nav-link {
+    color: white;
+    margin-left: 15px;
+}
+.universal-nav .nav-link:hover,
+.universal-nav .nav-link.active {
+    color: #dfefff;
+}
+
+/* Calendar Styles */
+.calendar-wrapper {
+    max-width: 900px;
+    margin-top: 20px;
+}
+
+.weekday-row div {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar-day {
+    height: 90px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    padding: 6px;
+    position: relative;
+}
+
+.calendar-day .date-num {
+    font-weight: 600;
+}
+
+.calendar-day.faded {
+    background: #f4f6f8;
+    color: #adb5bd;
+}
+
+.active-day {
+    border: 2px solid #007bff;
+}
+
+.med-dot {
+    width: 8px;
+    height: 8px;
+    background: #007bff;
+    border-radius: 50%;
+    margin-top: 4px;
+}
+
+/* Day medication details */
+.day-details {
+    border-left: 4px solid #007bff;
+}
+
+.med-item small {
+    color: #6c757d;
+}
