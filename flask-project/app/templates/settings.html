@@ -36,8 +36,6 @@
 
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.editmed') }}">Edit Med</a></li>
-
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
 
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
@@ -98,7 +96,6 @@
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </div>
-
         </div>
 
         <!-- INFO -->
@@ -126,7 +123,7 @@
 
         <!-- LOGOUT BUTTON -->
         <div class="mt-5 text-center">
-            <a href="{{ url_for('settings_bp.settings') }}" class="btn btn-danger px-5 py-2 rounded-pill">Log Out</a>
+            <a href="{{ url_for('auth_bp.login') }}" class="btn btn-danger px-5 py-2 rounded-pill">Log Out</a>
         </div>
 
     </main>
