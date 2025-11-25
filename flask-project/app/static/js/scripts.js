@@ -1,46 +1,44 @@
 // static/js/scripts.js
 
 document.addEventListener("DOMContentLoaded", () => {
+// -------------------------------------
+// MED LIST (medlist.html)
+// -------------------------------------
+const medListEl = document.getElementById("med-list-js");
 
-  // -------------------------------------
-  // MED LIST (medlist.html)
-  // -------------------------------------
-  const medListEl = document.getElementById("med-list-js");
+if (medListEl) {
+  medListEl.innerHTML = `<p>Loading medications...</p>`;
 
-  if (medListEl) {
-    // Optional: show loading state
-    medListEl.innerHTML = `<p>Loading medications...</p>`;
+  fetch("/med/api/meds")   // ✅ Correct URL
+    .then(res => {
+      if (!res.ok) throw new Error("Failed to load medications");
+      return res.json();
+    })
+    .then(meds => {
+      medListEl.innerHTML = "";
 
-    fetch("/api/meds")       // <-- requires @med_bp.route('/api/meds') in med_routes.py
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to load medications");
-        return res.json();
-      })
-      .then(meds => {
-        medListEl.innerHTML = "";
-
-        meds.forEach(med => {
-          medListEl.innerHTML += `
-            <div class="med-item d-flex align-items-center justify-content-between mb-3">
-              <div class="d-flex align-items-center gap-3">
-                <div class="icon-box bg-blue">
-                  <i class="bi bi-capsule"></i>
-                </div>
-                <div>
-                  <div class="med-title">${med.name}</div>
-                  <div class="med-sub">${med.dose} • ${med.freq}</div>
-                </div>
+      meds.forEach(med => {
+        medListEl.innerHTML += `
+          <div class="med-item d-flex align-items-center justify-content-between mb-3">
+            <div class="d-flex align-items-center gap-3">
+              <div class="icon-box bg-blue">
+                <i class="bi bi-capsule"></i>
               </div>
-              <i class="bi bi-three-dots-vertical more-icon"></i>
+              <div>
+                <div class="med-title">${med.name}</div>
+                <div class="med-sub">${med.dose} • ${med.freq}</div>
+              </div>
             </div>
-          `;
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        medListEl.innerHTML = `<p class="text-danger">Could not load medications.</p>`;
+            <i class="bi bi-three-dots-vertical more-icon"></i>
+          </div>
+        `;
       });
-  }
+    })
+    .catch(err => {
+      console.error(err);
+      medListEl.innerHTML = `<p class="text-danger">Could not load medications.</p>`;
+    });
+}
 
 
 
@@ -104,7 +102,7 @@ const totalTodayEl = document.getElementById("total-today-js");
 if (dashSchedule) {
   dashSchedule.innerHTML = `<p>Loading today’s schedule...</p>`;
 
-  fetch("/api/dashboard")
+  fetch("/med/api/dashboard")
     .then(res => {
       if (!res.ok) throw new Error("Failed to load dashboard data");
       return res.json();

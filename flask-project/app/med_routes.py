@@ -31,10 +31,6 @@ def dashboard():
                            meds=DUMMY_MEDS)
 
 
-@med_bp.route('/api/meds')
-def api_meds():
-    return jsonify(DUMMY_MEDS)
-
 @med_bp.route('/addmed')
 def addmed():
     return render_template('addmed.html')

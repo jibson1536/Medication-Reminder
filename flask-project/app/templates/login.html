@@ -52,26 +52,26 @@
 
             <!-- LOGIN CARD -->
             <div class="card login-card shadow-sm p-4">
-                <form>
+                <form method="POST" action="{{ url_for('auth_bp.login') }}">
 
                     <div class="mb-3 text-start">
                         <label class="form-label field-label">Email</label>
-                        <input type="email" class="form-control field-input" placeholder="you@example.com">
+                        <input type="email" name="email" class="form-control field-input" placeholder="you@example.com" required>
                     </div>
-
+                
                     <div class="mb-2 text-start">
                         <label class="form-label field-label">Password</label>
-                        <input type="password" class="form-control field-input" placeholder="••••••••">
+                        <input type="password" name="password" class="form-control field-input" placeholder="••••••••" required>
                     </div>
-
+                
                     <div class="text-end mb-3">
                         <a href="#" class="forgot-link">Forgot password?</a>
                     </div>
-
-                    <button class="btn btn-dark w-100 sign-btn">Sign In</button>
-
+                
+                    <button type="submit" class="btn btn-dark w-100 sign-btn">Sign In</button>
+                
                 </form>
-            </div>
+                
 
             <p class="signup-text mt-4">
                 Don't have an account?
