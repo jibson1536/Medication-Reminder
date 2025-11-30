@@ -1,12 +1,19 @@
 from flask import Flask, redirect, url_for
+from flask_login import LoginManager
+from .database import init_db
+
+login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "super-secret-key-choose-your-own"
+    app.secret_key = "super-secret-key"
+
     # Initialize MongoDB
-    from .database import init_db
     init_db(app)
-    
+
+    # Setup Flask-Login
+    login_manager.init_app(app)
+    login_manager.login_view = "auth_bp.login"  # if user not logged in, go to login
 
     # Import Blueprints
     from .auth_routes import auth_bp
@@ -17,7 +24,7 @@ def create_app():
     from .profile_routes import profile_bp
     from .settings_routes import settings_bp
 
-    # Register Blueprints
+    # Register blueprints
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(onboarding_bp, url_prefix="/onboarding")
     app.register_blueprint(med_bp, url_prefix="/med")
@@ -28,6 +35,6 @@ def create_app():
 
     @app.route("/")
     def index():
-        return redirect(url_for("auth_bp.welcome"))
+        return redirect(url_for("auth_bp.login"))
 
     return app

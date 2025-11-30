@@ -91,41 +91,45 @@ if (medListEl) {
 
   // -------------------------------------
   // DASHBOARD (dashboard.html)
-  // -------------------------------------
-  // DASHBOARD (dashboard.html)
+ // -------------------------------------
+// -------------------------------------
+// DASHBOARD (dashboard.html)
+// -------------------------------------
 const dashSchedule = document.getElementById("dashboard-schedule-js");
-
 const takenTodayEl = document.getElementById("taken-today-js");
 const upcomingEl   = document.getElementById("upcoming-js");
 const totalTodayEl = document.getElementById("total-today-js");
 
-if (dashSchedule) {
+function loadDashboard() {
   dashSchedule.innerHTML = `<p>Loading today’s schedule...</p>`;
 
   fetch("/med/api/dashboard")
-    .then(res => {
-      if (!res.ok) throw new Error("Failed to load dashboard data");
+    .then(async res => {
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`Dashboard HTTP ${res.status}: ${text}`);
+      }
       return res.json();
     })
     .then(data => {
       const meds = data.meds || [];
       const stats = data.stats || {};
 
-      // Fill stats if elements exist
-      if (takenTodayEl && typeof stats.taken_today !== "undefined") {
-        takenTodayEl.textContent = stats.taken_today;
-      }
-      if (upcomingEl && typeof stats.upcoming !== "undefined") {
-        upcomingEl.textContent = stats.upcoming;
-      }
-      if (totalTodayEl && typeof stats.total_today !== "undefined") {
-        totalTodayEl.textContent = stats.total_today;
-      }
+      // Update stats
+      if (takenTodayEl)  takenTodayEl.textContent  = stats.taken_today ?? "--";
+      if (upcomingEl)    upcomingEl.textContent    = stats.upcoming ?? "--";
+      if (totalTodayEl)  totalTodayEl.textContent  = stats.total_today ?? "--";
+
+      // Sort: upcoming first, then taken
+      meds.sort((a, b) => (a.status === "taken") ? 1 : -1);
 
       dashSchedule.innerHTML = "";
+
       meds.forEach(med => {
+        const isTaken = med.status === "taken";
+
         dashSchedule.innerHTML += `
-          <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3">
+          <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3 ${isTaken ? 'opacity-50' : ''}">
             <div class="d-flex align-items-center gap-3">
               <i class="bi bi-capsule med-icon"></i>
               <div>
@@ -133,10 +137,17 @@ if (dashSchedule) {
                 <div class="med-meta">${med.dose} • ${med.time}</div>
               </div>
             </div>
-            <button class="btn btn-outline-light schedule-take-btn">Take</button>
+
+            <button class="btn ${isTaken ? 'btn-success' : 'btn-outline-light'} take-btn"
+                    data-id="${med._id}"
+                    ${isTaken ? "disabled" : ""}>
+              ${isTaken ? "Taken ✔" : "Take"}
+            </button>
           </div>
         `;
       });
+
+      attachTakeButtonEvents();
     })
     .catch(err => {
       console.error(err);
@@ -144,7 +155,38 @@ if (dashSchedule) {
     });
 }
 
+function attachTakeButtonEvents() {
+  document.querySelectorAll(".take-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const medId = btn.dataset.id;
+      console.log("Taking med:", medId);
 
+      fetch(`/med/api/meds/${medId}/take`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(async res => {
+        if (!res.ok) {
+          const text = await res.text();
+          throw new Error(`Take HTTP ${res.status}: ${text}`);
+        }
+        return res.json();
+      })
+      .then(() => {
+        // Refresh dashboard UI (stats + buttons)
+        loadDashboard();
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Could not mark medication as taken. Check console for details.");
+      });
+    });
+  });
+}
+
+if (dashSchedule) {
+  loadDashboard();
+}
 
   // -------------------------------------
   // NOTIFICATIONS (notifications.html / notificationsettings.html)
