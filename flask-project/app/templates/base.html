@@ -23,13 +23,14 @@
         </div>
 
         <nav class="nav-right">
-            <a href="{{ url_for('dashboard') }}">Dashboard</a>
-            <a href="{{ url_for('med_list') }}">Med List</a>
-            <a href="{{ url_for('add_med') }}">Add Med</a>
-            <a href="{{ url_for('history') }}">History</a>
-            <a href="{{ url_for('notifications') }}">Notifications</a>
-            <a href="{{ url_for('settings') }}">Settings</a>
-            <a href="{{ url_for('profile') }}">Profile</a>
+            <!-- FIXED: use blueprint endpoints -->
+            <a href="{{ url_for('med_bp.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('med_bp.medlist') }}">Med List</a>
+            <a href="{{ url_for('med_bp.addmed') }}">Add Med</a>
+            <a href="{{ url_for('profile_bp.history') }}">History</a>
+            <a href="{{ url_for('notify_bp.notifications') }}">Notifications</a>
+            <a href="{{ url_for('settings_bp.settings') }}">Settings</a>
+            <a href="{{ url_for('profile_bp.profile') }}">Profile</a>
 
             <!-- Dark / Light mode toggle -->
             <button id="theme-toggle" class="theme-toggle" type="button">🌙</button>
