@@ -650,3 +650,17 @@
 .form-check-input {
     cursor: pointer;
 }
+
+.next-up-highlight {
+    border: 2px solid #4aa3ff !important;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(74, 163, 255, 0.4);
+  }
+  
+  .next-up-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: #007bff;
+    margin-top: 3px;
+  }
+  

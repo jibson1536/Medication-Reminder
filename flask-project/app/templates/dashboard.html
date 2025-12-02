@@ -45,34 +45,37 @@
     <!-- MAIN DASHBOARD -->
     <main class="dashboard-container">
 
-        <!-- HERO SECTION -->
-        <section class="dashboard-hero">
-            <div class="d-flex justify-content-between align-items-start mb-3">
-                <div>
-                    <div class="hero-greeting">Good afternoon</div>
-                    <h2 class="hero-name">John Doe</h2>
-                </div>
+       <!-- HERO SECTION -->
+            <section class="dashboard-hero">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div>
+                        <div id="hero-greeting-js" class="hero-greeting">Hello</div>
+                        <h2 id="hero-name-js" class="hero-name">User</h2>
+                    </div>
 
-                <div class="hero-profile">
-                    <i class="bi bi-person"></i>
+                    <div class="hero-profile">
+                        <i class="bi bi-person"></i>
+                    </div>
                 </div>
-            </div>
+            </section>
+
 
             <!-- NEXT MEDICATION CARD (static for now, can be wired to data.next_med later) -->
-            <div class="next-med-card">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="next-med-icon">
-                        <i class="bi bi-clock"></i>
+            <div id="dashboard-schedule-js">
+                {% for med in meds %}
+                <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3">
+                    <div class="d-flex align-items-center gap-3">
+                        <i class="bi bi-capsule med-icon"></i>
+                        <div>
+                            <div class="med-name">{{ med.name }}</div>
+                            <div class="med-meta">{{ med.dose }} • {{ med.time }}</div>
+                        </div>
                     </div>
-                    <div>
-                        <div class="next-med-label">Next Medication</div>
-                        <div class="next-med-time">02:00 PM</div>
-                        <div class="next-med-drug">Lisinopril <span>10mg</span></div>
-                    </div>
+                    <button class="btn btn-outline-light schedule-take-btn">Take</button>
                 </div>
-
-                <button class="btn next-med-btn">Mark as Taken</button>
+                {% endfor %}
             </div>
+            
         </section>
 
         <!-- STATS -->
