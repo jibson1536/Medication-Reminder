@@ -66,7 +66,8 @@
 
             <div class="settings-item">
                 <span>Change Email</span>
-                <a href="#" class="settings-arrow">
+                <!-- NEW: route to change email page -->
+                <a href="{{ url_for('settings_bp.change_email') }}" class="settings-arrow">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </div>
@@ -92,7 +93,8 @@
 
             <div class="settings-item">
                 <span>Reminder Sound</span>
-                <a href="#" class="settings-arrow">
+                <!-- NEW: route to reminder sound page -->
+                <a href="{{ url_for('settings_bp.reminder_sound') }}" class="settings-arrow">
                     <i class="bi bi-chevron-right"></i>
                 </a>
             </div>
@@ -104,25 +106,39 @@
 
             <div class="settings-item">
                 <span>Privacy Policy</span>
-                <a href="#" class="settings-arrow"><i class="bi bi-chevron-right"></i></a>
+                <!-- NEW: route to privacy policy page -->
+                <a href="{{ url_for('settings_bp.privacy_policy') }}" class="settings-arrow">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
             </div>
 
             <div class="settings-item">
                 <span>Terms of Service</span>
-                <a href="#" class="settings-arrow"><i class="bi bi-chevron-right"></i></a>
+                <!-- NEW: route to terms of service page -->
+                <a href="{{ url_for('settings_bp.terms_of_service') }}" class="settings-arrow">
+                    <i class="bi bi-chevron-right"></i>
+                </a>
             </div>
         </div>
 
         <!-- DELETE ACCOUNT -->
         <div class="settings-section mt-4">
-            <div class="settings-item text-danger">
-                <span>Delete Account</span>
-                <a href="#" class="settings-arrow text-danger"><i class="bi bi-chevron-right"></i></a>
-            </div>
+            <!-- use POST with a form for safety -->
+            <form action="{{ url_for('settings_bp.delete_account') }}" method="post"
+                  class="w-100"
+                  onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
+                <div class="settings-item text-danger">
+                    <span>Delete Account</span>
+                    <button type="submit" class="settings-arrow btn btn-link text-danger p-0">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+            </form>
         </div>
 
         <!-- LOGOUT BUTTON -->
         <div class="mt-5 text-center">
+            <!-- if you have a logout route you can change this to url_for('auth_bp.logout') -->
             <a href="{{ url_for('auth_bp.login') }}" class="btn btn-danger px-5 py-2 rounded-pill">Log Out</a>
         </div>
 
