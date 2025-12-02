@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reminder Sound - Med Reminder</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+
+<body style="background-color:#f5f7fb;">
+
+<div class="container py-5" style="max-width: 780px;">
+
+    <!-- Page Heading -->
+    <div class="mb-4">
+        <h2 class="fw-bold" style="color:#006bff;">Notification Settings</h2>
+        <p class="text-muted mb-0">Choose the sound you hear when it’s time to take your medication.</p>
+    </div>
+
+    <!-- Card -->
+    <div class="card shadow-sm border-0" style="border-radius:18px;">
+        <div class="card-body p-4 p-md-5">
+
+            <div class="d-flex align-items-center mb-4">
+                <div class="me-3 d-flex align-items-center justify-content-center rounded-circle"
+                     style="width:44px;height:44px;background:#e6f7ff;color:#00a2ff;">
+                    <i class="bi bi-volume-up-fill fs-5"></i>
+                </div>
+                <div>
+                    <h5 class="mb-0 fw-semibold">Reminder Sound</h5>
+                    <small class="text-muted">Tap a sound to select it.</small>
+                </div>
+            </div>
+
+            <form method="post">
+                <div class="list-group border-0 mb-4">
+
+                    {% for sound in available_sounds %}
+                        <label class="list-group-item d-flex align-items-center border-0 mb-2"
+                               style="border-radius:14px;background:#f7f9ff;">
+                            <div class="form-check m-0">
+                                <input class="form-check-input"
+                                       type="radio"
+                                       name="sound"
+                                       value="{{ sound }}"
+                                       {% if sound == selected_sound %}checked{% endif %}>
+                            </div>
+                            <div class="ms-3 flex-grow-1">
+                                <span class="fw-semibold">{{ sound }}</span>
+                            </div>
+                            <div class="ms-2 text-muted">
+                                <i class="bi bi-music-note-beamed"></i>
+                            </div>
+                        </label>
+                    {% endfor %}
+
+                </div>
+
+                <div class="d-flex flex-wrap gap-3">
+                    <button type="submit"
+                            class="btn text-white fw-semibold px-4 py-2"
+                            style="border-radius:999px;background:#006bff;">
+                        Save Sound
+                    </button>
+
+                    <a href="{{ url_for('settings_bp.settings') }}"
+                       class="btn btn-outline-secondary px-4 py-2"
+                       style="border-radius:999px;">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-3">
+        <a href="{{ url_for('settings_bp.settings') }}" class="text-decoration-none text-muted">
+            <i class="bi bi-arrow-left"></i> Back to Settings
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
