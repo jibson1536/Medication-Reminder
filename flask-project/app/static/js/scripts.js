@@ -99,6 +99,8 @@ const dashSchedule = document.getElementById("dashboard-schedule-js");
 const takenTodayEl = document.getElementById("taken-today-js");
 const upcomingEl   = document.getElementById("upcoming-js");
 const totalTodayEl = document.getElementById("total-today-js");
+const heroGreetingEl = document.getElementById("hero-greeting-js");
+const heroNameEl = document.getElementById("hero-name-js");
 
 function loadDashboard() {
   dashSchedule.innerHTML = `<p>Loading today’s schedule...</p>`;
@@ -116,20 +118,91 @@ function loadDashboard() {
       const stats = data.stats || {};
 
       // Update stats
-      if (takenTodayEl)  takenTodayEl.textContent  = stats.taken_today ?? "--";
-      if (upcomingEl)    upcomingEl.textContent    = stats.upcoming ?? "--";
-      if (totalTodayEl)  totalTodayEl.textContent  = stats.total_today ?? "--";
+      takenTodayEl.textContent  = stats.taken_today ?? "--";
+      upcomingEl.textContent    = stats.upcoming ?? "--";
+      totalTodayEl.textContent  = stats.total_today ?? "--";
 
-      // Sort: upcoming first, then taken
-      meds.sort((a, b) => (a.status === "taken") ? 1 : -1);
+      const now = new Date();
+
+                // Dynamic greeting + logged in user name
+    const hour = new Date().getHours();
+    let greeting;
+
+    if (hour < 12) greeting = "Good morning";
+    else if (hour < 18) greeting = "Good afternoon";
+    else greeting = "Good evening";
+
+    heroGreetingEl.textContent = greeting;
+
+    // Set first name only
+    if (data.user?.name) {
+      const firstName = data.user.name.split(" ")[0];
+      heroNameEl.textContent = firstName;
+    }
+
+      
+
+      // Auto-detect missed meds
+      meds.forEach(med => {
+        const medTime = new Date(`${med.date}T${med.time}:00`);
+        if (med.status === "upcoming" && medTime < now) {
+          med.status = "missed";
+        }
+      });
+
+      // Sort: upcoming → missed → taken (each by time)
+      const order = { upcoming: 0, missed: 1, taken: 2 };
+      meds.sort((a, b) => {
+        if (order[a.status] !== order[b.status])
+          return order[a.status] - order[b.status];
+        return a.time.localeCompare(b.time);
+      });
 
       dashSchedule.innerHTML = "";
 
+      let missedSection = "";
+      let takenSection = "";
+
       meds.forEach(med => {
         const isTaken = med.status === "taken";
+        const isMissed = med.status === "missed";
 
+        if (isTaken) {
+          takenSection += `
+            <div class="schedule-card d-flex justify-content-between align-items-center mb-2 p-2 opacity-50 small">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-check-circle-fill text-success"></i>
+                <div>
+                  <div class="med-name small">${med.name}</div>
+                  <div class="med-meta small">${med.dose} • ${med.time}</div>
+                </div>
+              </div>
+            </div>
+          `;
+          return;
+        }
+
+        if (isMissed) {
+          missedSection += `
+            <div class="schedule-card d-flex justify-content-between align-items-center mb-2 p-2 bg-danger-subtle">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-exclamation-circle-fill text-danger"></i>
+                <div>
+                  <div class="med-name small">${med.name}</div>
+                  <div class="med-meta small">${med.dose} • ${med.time}</div>
+                </div>
+              </div>
+              <button class="btn btn-outline-light miss-btn" data-id="${med._id}">
+                Mark Missed
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        // Upcoming meds
         dashSchedule.innerHTML += `
-          <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3 ${isTaken ? 'opacity-50' : ''}">
+          <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3">
             <div class="d-flex align-items-center gap-3">
               <i class="bi bi-capsule med-icon"></i>
               <div>
@@ -138,55 +211,77 @@ function loadDashboard() {
               </div>
             </div>
 
-            <button class="btn ${isTaken ? 'btn-success' : 'btn-outline-light'} take-btn"
-                    data-id="${med._id}"
-                    ${isTaken ? "disabled" : ""}>
-              ${isTaken ? "Taken ✔" : "Take"}
+            <button class="btn btn-outline-light take-btn"
+                    data-id="${med._id}">
+              Take
             </button>
           </div>
         `;
       });
 
-      attachTakeButtonEvents();
+      // Missed section
+      if (missedSection) {
+        dashSchedule.innerHTML += `
+          <hr class="my-4" />
+          <h6 class="text-danger mb-3">Missed</h6>
+          ${missedSection}
+        `;
+      }
+
+      // Taken section
+      if (takenSection) {
+        dashSchedule.innerHTML += `
+          <hr class="my-4" />
+          <h6 class="text-secondary mb-3">Taken Today</h6>
+          ${takenSection}
+        `;
+      }
+
+      attachButtonEvents();
     })
     .catch(err => {
-      console.error(err);
+      console.error("Dashboard error:", err);
       dashSchedule.innerHTML = `<p class="text-danger">Could not load schedule.</p>`;
     });
 }
 
-function attachTakeButtonEvents() {
+function attachButtonEvents() {
+  // TAKE button
   document.querySelectorAll(".take-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const medId = btn.dataset.id;
-      console.log("Taking med:", medId);
-
-      fetch(`/med/api/meds/${medId}/take`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" }
-      })
-      .then(async res => {
-        if (!res.ok) {
-          const text = await res.text();
-          throw new Error(`Take HTTP ${res.status}: ${text}`);
-        }
-        return res.json();
-      })
-      .then(() => {
-        // Refresh dashboard UI (stats + buttons)
-        loadDashboard();
-      })
-      .catch(err => {
-        console.error(err);
-        alert("Could not mark medication as taken. Check console for details.");
-      });
-    });
+    btn.addEventListener("click", () => handleMedAction(btn.dataset.id, "take"));
   });
+
+  // MISSED button
+  document.querySelectorAll(".miss-btn").forEach(btn => {
+    btn.addEventListener("click", () => handleMedAction(btn.dataset.id, "missed"));
+  });
+}
+
+function handleMedAction(medId, action) {
+  console.log("Updating med:", medId, "Action:", action);
+
+  fetch(`/med/api/meds/${medId}/${action}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" }
+  })
+    .then(async res => {
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`${action} HTTP ${res.status}: ${text}`);
+      }
+      return res.json();
+    })
+    .then(() => loadDashboard())
+    .catch(err => {
+      console.error(err);
+      alert(`Could not mark medication as ${action}. Check console.`);
+    });
 }
 
 if (dashSchedule) {
   loadDashboard();
 }
+
 
   // -------------------------------------
   // NOTIFICATIONS (notifications.html / notificationsettings.html)
