@@ -1,10 +1,13 @@
-from flask import Blueprint, render_template, jsonify, redirect, url_for, request
-from flask import request, redirect, url_for
+from flask import Blueprint, render_template, jsonify, redirect, url_for, request, flash
 from flask_login import login_required, current_user
 from bson.objectid import ObjectId
+from datetime import datetime, date
 from app.database import mongo
 
 med_bp = Blueprint('med_bp', __name__)
+
+# NEW collection: stores one summary per user per day
+daily_summary_collection = mongo.db.daily_summary
 
 
 # -----------------------------
@@ -28,7 +31,6 @@ def medlist():
 # -----------------------------
 # Add Medication Page
 # -----------------------------
-from flask import request, flash
 @med_bp.route('/addmed', methods=["GET", "POST"])
 @login_required
 def addmed():
@@ -38,13 +40,12 @@ def addmed():
         freq = request.form.get("freq")
         time = request.form.get("time")
         start_date = request.form.get("start_date")
-        duration_value = int(request.form.get("duration_value"))
-        duration_unit = request.form.get("duration_unit")
+        duration_value = request.form.get("duration_value")  # unused for now
+        duration_unit = request.form.get("duration_unit")    # unused for now
 
         if not name or not dose or not freq or not time:
             flash("All fields are required", "error")
             return redirect(url_for("med_bp.addmed"))
-        from datetime import datetime
 
         mongo.db.medications.insert_one({
             "user_id": current_user.get_id(),
@@ -53,9 +54,9 @@ def addmed():
             "freq": freq,
             "time": time,
             "status": "ongoing",
-            "date": datetime.now()  # Temporary until we use real scheduling
-
+            "date": datetime.now()  # Temporary until real scheduling is used
         })
+
         flash("Medication added successfully!", "success")
         return redirect(url_for("med_bp.dashboard"))
 
@@ -112,8 +113,6 @@ def api_med(med_id):
 @med_bp.route('/api/dashboard')
 @login_required
 def api_dashboard():
-    from datetime import date
-
     user_id = current_user.get_id()
     today_str = date.today().strftime("%Y-%m-%d")
 
@@ -140,10 +139,28 @@ def api_dashboard():
         "upcoming": upcoming
     }
 
+    # 🔹 NEW: save/update a DAILY SUMMARY document for this user & date
+    daily_summary_collection.update_one(
+        {"user_id": user_id, "date": today_str},
+        {
+            "$set": {
+                "user_id": user_id,
+                "date": today_str,
+                "total_today": total_today,
+                "taken_today": taken_today,
+                "upcoming": upcoming,
+                "generated_at": datetime.utcnow()
+            }
+        },
+        upsert=True
+    )
+
     return jsonify({"stats": stats, "meds": meds})
 
-from datetime import datetime, date
-from bson import ObjectId
+
+# -----------------------------
+# Mark medication as taken (API)
+# -----------------------------
 @med_bp.route("/api/meds/<med_id>/take", methods=["POST"])
 @login_required
 def api_take_med(med_id):
