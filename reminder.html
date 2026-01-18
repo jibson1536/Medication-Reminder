@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reminder</title>
+
+  <!-- Shared CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="#">Medication Reminder</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item"><a class="nav-link" href="index.html">Login</a></li>
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Dashboard</a></li>
+          <li class="nav-item"><a class="nav-link active text-white bg-dark px-3 rounded-pill" href="reminder.html">Reminder</a></li>
+          <li class="nav-item"><a class="nav-link" href="details.html">Details</a></li>
+          <li class="nav-item"><a class="nav-link" href="history.html">History</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 🔹 Reminder Card -->
+  <div class="reminder-card shadow-lg">
+    <div class="reminder-header">
+      <i class="bi bi-bell"></i>
+      <h3>Time to Take Your Medicine!</h3>
+      <small><i class="bi bi-clock"></i> 2:00 PM</small>
+    </div>
+
+    <div class="reminder-body">
+      <div class="med-info-box">
+        <h5>Lisinopril</h5>
+        <p><strong>Dosage:</strong> 10mg</p>
+        <p><strong>Type:</strong> Tablet</p>
+        <p><strong>Instructions:</strong> Take with water after meal</p>
+      </div>
+
+      <div class="note-box">
+        <strong>Note:</strong> Do not skip this dose. It's important for your blood pressure management.
+      </div>
+
+      <div class="action-btn" id="skipDose">
+        <i class="bi bi-x-circle"></i> Skip This Dose
+      </div>
+
+      <div class="remind-btn" id="remindLater">Remind me in 10 minutes</div>
+      <div class="confirmation" id="confirmationMessage">✅ You’ll be reminded again in 10 minutes!</div>
+    </div>
+  </div>
+
+  <!-- JS Scripts -->
+  <script>
+    // Interactive Logic
+    const remindBtn = document.getElementById('remindLater');
+    const confirmationMsg = document.getElementById('confirmationMessage');
+    const skipBtn = document.getElementById('skipDose');
+
+    remindBtn.addEventListener('click', () => {
+      confirmationMsg.style.display = 'block';
+      remindBtn.style.display = 'none';
+      setTimeout(() => {
+        confirmationMsg.style.display = 'none';
+        remindBtn.style.display = 'block';
+      }, 4000);
+    });
+
+    skipBtn.addEventListener('click', () => {
+      alert('You have skipped this dose.');
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

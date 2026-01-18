@@ -1,3 +1,4 @@
+import os
 from flask import Flask, redirect, url_for
 from flask_login import LoginManager
 from .database import init_db
@@ -6,7 +7,14 @@ login_manager = LoginManager()
 
 def create_app():
     app = Flask(__name__)
-    app.secret_key = "super-secret-key"
+
+    # 🔐 Load security-related config from environment
+    app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-secret")
+    app.config["JWT_SECRET"] = os.environ.get("JWT_SECRET", "dev-jwt-secret")
+    app.config["JWT_EXPIRES_HOURS"] = int(os.environ.get("JWT_EXPIRES_HOURS", 1))
+    app.config["BCRYPT_SALT_ROUNDS"] = int(os.environ.get("BCRYPT_SALT_ROUNDS", 10))
+
+    # (You no longer need: app.secret_key = "super-secret-key")
 
     # Initialize MongoDB
     init_db(app)

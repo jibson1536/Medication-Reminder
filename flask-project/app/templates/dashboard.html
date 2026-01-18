@@ -13,7 +13,6 @@
 
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
-
 </head>
 
 <body class="bg-white">
@@ -23,17 +22,16 @@
         <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">
             Med Reminder
         </a>
-    
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
             <span class="navbar-toggler-icon"></span>
         </button>
-    
+
         <div class="collapse navbar-collapse" id="menu">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
-                <!-- Edit is usually accessed from Med List / Details, so removed from navbar -->
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
@@ -41,45 +39,53 @@
             </ul>
         </div>
     </nav>
-    
+
     <!-- MAIN DASHBOARD -->
     <main class="dashboard-container">
 
-       <!-- HERO SECTION -->
-            <section class="dashboard-hero">
-                <div class="d-flex justify-content-between align-items-start mb-3">
-                    <div>
-                        <div id="hero-greeting-js" class="hero-greeting">Hello</div>
-                        <h2 id="hero-name-js" class="hero-name">User</h2>
-                    </div>
-
-                    <div class="hero-profile">
-                        <i class="bi bi-person"></i>
-                    </div>
+        <!-- HERO SECTION -->
+        <section class="dashboard-hero">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <div id="hero-greeting-js" class="hero-greeting">Hello</div>
+                    <h2 id="hero-name-js" class="hero-name">User</h2>
                 </div>
-            </section>
 
-
-            <!-- NEXT MEDICATION CARD (static for now, can be wired to data.next_med later) -->
-            <div id="dashboard-schedule-js">
-                {% for med in meds %}
-                <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3">
-                    <div class="d-flex align-items-center gap-3">
-                        <i class="bi bi-capsule med-icon"></i>
-                        <div>
-                            <div class="med-name">{{ med.name }}</div>
-                            <div class="med-meta">{{ med.dose }} • {{ med.time }}</div>
-                        </div>
-                    </div>
-                    <button class="btn btn-outline-light schedule-take-btn">Take</button>
+                <div class="hero-profile">
+                    <i class="bi bi-person"></i>
                 </div>
-                {% endfor %}
             </div>
-            
         </section>
 
-        <!-- STATS -->
-        <section class="container stats-row">
+        <!-- UPCOMING MEDS CARDS (from meds loop) -->
+        <div class="container mt-3" id="dashboard-upcoming-js">
+            {% for med in meds %}
+            <div class="schedule-card d-flex justify-content-between align-items-center mb-3 p-3">
+                <div class="d-flex align-items-center gap-3">
+                    <i class="bi bi-capsule med-icon"></i>
+                    <div>
+                        <div class="med-name">{{ med.name }}</div>
+                        <div class="med-meta">{{ med.dose }} • {{ med.time }}</div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-light schedule-take-btn">Take</button>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- ✅ TODAY’S SCHEDULE TITLE (NOW ABOVE STATS) -->
+        <section class="container mt-4 mb-3">
+            <h5 class="mb-3">Today's Schedule</h5>
+
+            <!-- Optional wrapper if your JS uses it -->
+            <div id="dashboard-stats-js"></div>
+
+            <!-- Schedule items injected by JS -->
+            <div id="dashboard-schedule-js"></div>
+        </section>
+
+        <!-- ✅ STATS (NOW BELOW TODAY'S SCHEDULE) -->
+        <section class="container stats-row mb-5">
             <div class="row g-3">
                 <div class="col-md-4">
                     <div class="stat-card text-center">
@@ -100,17 +106,6 @@
                     </div>
                 </div>
             </div>
-        </section>
-  
-        <!-- TODAY’S SCHEDULE -->
-        <section class="container mt-4 mb-5">
-            <h5 class="mb-3">Today's Schedule</h5>
-
-            <!-- (Optional) extra wrapper if you want -->
-            <div id="dashboard-stats-js"></div>
-
-            <!-- Schedule items injected by JS -->
-            <div id="dashboard-schedule-js"></div>
         </section>
 
         <!-- FLOATING ADD BUTTON -->

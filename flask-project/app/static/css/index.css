@@ -664,3 +664,486 @@
     margin-top: 3px;
   }
   
+  /* ===========================
+   NAVBAR MOBILE FIX
+=========================== */
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.5);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* ===========================
+   DASHBOARD PRO UPGRADE
+=========================== */
+.page-content{
+    padding: 28px 22px 70px;
+  }
+  
+  /* HERO */
+  .dash-hero{
+    background: linear-gradient(90deg, var(--primary-blue), #2b8fff);
+    color: #fff;
+    border-radius: 0 0 28px 28px;
+    padding: 26px 22px 22px;
+    margin: -28px -22px 22px;
+  }
+  
+  .dash-hero-top{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 14px;
+  }
+  
+  .dash-greet{
+    font-size: 13px;
+    opacity: .9;
+  }
+  
+  .dash-name{
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+  }
+  
+  .hero-chip{
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  
+  /* NEXT DOSE */
+  .next-dose{
+    background: rgba(255,255,255,0.16);
+    border: 1px solid rgba(255,255,255,0.22);
+    border-radius: 18px;
+    padding: 14px 14px;
+    margin-top: 16px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap: 12px;
+  }
+  
+  .next-dose .time{
+    font-size: 16px;
+    font-weight: 800;
+  }
+  
+  .next-dose .meta{
+    font-size: 13px;
+    opacity: .92;
+  }
+  
+  /* QUICK ACTIONS */
+  .quick-actions{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 14px;
+  }
+  
+  .qa{
+    background: rgba(255,255,255,0.14);
+    border: 1px solid rgba(255,255,255,0.20);
+    border-radius: 16px;
+    padding: 12px;
+    color: #fff;
+    text-decoration:none;
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+    min-height: 78px;
+  }
+  
+  .qa i{ font-size: 18px; }
+  .qa span{ font-weight: 800; font-size: 13px; }
+  .qa small{ opacity: .9; font-size: 12px; }
+  
+  /* STATS */
+  .stats-grid{
+    display:grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  
+  .stat{
+    background: #fff;
+    border-radius: 18px;
+    border: 1px solid #e9edf5;
+    padding: 14px 12px;
+  }
+  
+  .stat .num{
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.3px;
+  }
+  
+  .stat .label{
+    font-size: 12px;
+    color: #7b8796;
+    margin-top: 2px;
+    font-weight: 600;
+  }
+  
+  /* SCHEDULE CARD */
+  .dash-card{
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid #e9edf5;
+    padding: 16px 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.03);
+  }
+  
+  .dash-card-title{
+    font-size: 13px;
+    color: #7f8aa3;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  
+  /* PRO SCHEDULE ITEM */
+  .schedule-item-pro{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 12px;
+    padding: 14px 14px;
+    border-radius: 16px;
+    border: 1px solid #eef2f5;
+    background: #fff;
+    margin-top: 12px;
+  }
+  
+  .schedule-left{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    min-width: 0;
+  }
+  
+  .pill-dot{
+    width: 44px;
+    height: 44px;
+    border-radius: 14px;
+    background: rgba(1,164,255,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color: var(--primary-blue);
+    font-size: 18px;
+    flex: 0 0 auto;
+  }
+  
+  .schedule-name{
+    font-weight: 800;
+    margin: 0;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .schedule-meta{
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: #7b8796;
+  }
+  
+  .take-btn-pro{
+    border-radius: 999px !important;
+    font-weight: 800;
+    padding: 8px 14px;
+  }
+  
+  /* responsive */
+  @media (max-width: 768px){
+    .stats-grid{ grid-template-columns: 1fr; }
+    .quick-actions{ grid-template-columns: 1fr; }
+  }
+
+  /* ===========================
+   PROFESSIONAL MICRO EFFECTS
+   (paste at end of index.css)
+=========================== */
+
+/* Softer app background so cards pop */
+body {
+    background: #f6f8fc !important;
+  }
+  
+  /* Sticky navbar */
+  .topnav {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+  }
+  
+  /* Smooth fonts + transitions */
+  * {
+    transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease, opacity .2s ease;
+  }
+  
+  /* Cards: hover lift (works for schedule + taken cards) */
+  .schedule-card,
+  .schedule-item,
+  .stat-card,
+  .history-card,
+  .notification-card {
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  
+  .schedule-card:hover,
+  .schedule-item:hover,
+  .stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 34px rgba(0,0,0,0.10);
+  }
+  
+  /* Buttons: hover glow + press */
+  .schedule-take-btn,
+  .take-btn,
+  .sign-btn {
+    box-shadow: 0 10px 22px rgba(1,164,255,0.18);
+  }
+  
+  .schedule-take-btn:hover,
+  .take-btn:hover,
+  .sign-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(1,164,255,0.30);
+  }
+  
+  .schedule-take-btn:active,
+  .take-btn:active,
+  .sign-btn:active {
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 8px 16px rgba(1,164,255,0.16);
+  }
+  
+  /* Navbar links: pill hover (looks premium) */
+  .topnav .nav-link {
+    border-radius: 12px;
+    padding: 8px 12px;
+  }
+  
+  .topnav .nav-link:hover {
+    background: rgba(255,255,255,0.16);
+    opacity: 1;
+  }
+  
+  /* Remove layout shift from the "⋮" hover effect (recommended) */
+  .nav-link::after { display: none !important; }
+  
+  /* Section titles cleaner */
+  h5, .day-title, .summary-title {
+    letter-spacing: -0.2px;
+  }
+  
+  /* Floating add button: subtle pulse */
+  .fab-add {
+    animation: fabPulse 2.5s infinite;
+  }
+  
+  @keyframes fabPulse {
+    0%   { box-shadow: 0 8px 20px rgba(1,164,255,0.30); }
+    50%  { box-shadow: 0 14px 32px rgba(1,164,255,0.45); }
+    100% { box-shadow: 0 8px 20px rgba(1,164,255,0.30); }
+  }
+  
+  /* =========================================================
+   PRO UI POLISH PACK (KEEP SAME DESIGN)
+   Paste at END of index.css
+========================================================= */
+
+/* ---------- Global polish ---------- */
+:root{
+    --card-border: rgba(15, 23, 42, 0.08);
+    --shadow-1: 0 10px 25px rgba(15, 23, 42, 0.06);
+    --shadow-2: 0 18px 40px rgba(15, 23, 42, 0.10);
+    --soft-bg: #f6f8fc;
+  }
+  
+  html, body{
+    scroll-behavior: smooth;
+  }
+  
+  body{
+    background: var(--soft-bg) !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* smoother hover feel without affecting everything too hard */
+  a, button, .schedule-card, .schedule-item, .stat-card, .history-card, .med-item{
+    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, opacity .2s ease, border-color .2s ease;
+  }
+  
+  /* ---------- Navbar polish ---------- */
+  .topnav{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: var(--shadow-1);
+  }
+  
+  .topnav .navbar-brand{
+    letter-spacing: -0.2px;
+  }
+  
+  .topnav .nav-link{
+    border-radius: 12px;
+    padding: 8px 12px;
+  }
+  
+  .topnav .nav-link:hover{
+    background: rgba(255,255,255,0.16);
+    opacity: 1;
+  }
+  
+  /* Remove the 3-dots hover effect (it causes tiny shift + looks less pro) */
+  .nav-link::after { display: none !important; }
+  
+  /* ---------- Hero polish (same look, more premium) ---------- */
+  .dashboard-hero{
+    background: linear-gradient(90deg, var(--primary-blue), #2a8dff) !important;
+    box-shadow: var(--shadow-1);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* subtle shine */
+  .dashboard-hero::after{
+    content:"";
+    position:absolute;
+    top:-60px;
+    right:-120px;
+    width: 260px;
+    height: 260px;
+    background: rgba(255,255,255,0.16);
+    filter: blur(0px);
+    border-radius: 50%;
+  }
+  
+  .hero-name{
+    letter-spacing: -0.3px;
+  }
+  
+  /* ---------- Card system polish ---------- */
+  .schedule-card,
+  .schedule-item,
+  .med-item,
+  .history-card,
+  .notification-card,
+  .stat-card{
+    border: 1px solid var(--card-border) !important;
+  }
+  
+  .schedule-card:hover,
+  .schedule-item:hover,
+  .med-item:hover,
+  .stat-card:hover{
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-2);
+  }
+  
+  /* ---------- Buttons polish ---------- */
+  .schedule-take-btn,
+  .take-btn,
+  .sign-btn{
+    box-shadow: 0 10px 22px rgba(1,164,255,0.18);
+  }
+  
+  .schedule-take-btn:hover,
+  .take-btn:hover,
+  .sign-btn:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px rgba(1,164,255,0.30);
+  }
+  
+  .schedule-take-btn:active,
+  .take-btn:active,
+  .sign-btn:active{
+    transform: translateY(0px) scale(0.98);
+    box-shadow: 0 8px 16px rgba(1,164,255,0.16);
+  }
+  
+  /* Make outline light button on blue card readable */
+  .schedule-take-btn{
+    border-color: rgba(255,255,255,0.65) !important;
+    color: #fff !important;
+  }
+  .schedule-take-btn:hover{
+    background: rgba(255,255,255,0.14) !important;
+  }
+  
+  /* ---------- Stats row polish ---------- */
+  .stat-card{
+    box-shadow: var(--shadow-1);
+  }
+  
+  .stat-number{
+    letter-spacing: -0.4px;
+  }
+  
+  /* ---------- Section headings polish ---------- */
+  h5, .day-title{
+    letter-spacing: -0.2px;
+  }
+  
+  h5{
+    font-weight: 800;
+  }
+  
+  /* ---------- Taken list (completed look) ---------- */
+  /* This makes "Taken Today" cards feel disabled/complete without changing your layout */
+  .day-section .schedule-item,
+  .taken-card,
+  .taken-item{
+    opacity: 0.92;
+  }
+  
+  .day-section .schedule-item:hover{
+    opacity: 1;
+  }
+  
+  /* ---------- Floating button polish ---------- */
+  .fab-add{
+    box-shadow: 0 18px 36px rgba(1,164,255,0.35);
+    transform: translateZ(0);
+  }
+  
+  .fab-add:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 22px 46px rgba(1,164,255,0.45);
+  }
+  
+  /* subtle pulse (not annoying) */
+  .fab-add{
+    animation: fabPulse 2.6s infinite;
+  }
+  
+  @keyframes fabPulse{
+    0%   { box-shadow: 0 18px 36px rgba(1,164,255,0.28); }
+    50%  { box-shadow: 0 24px 52px rgba(1,164,255,0.42); }
+    100% { box-shadow: 0 18px 36px rgba(1,164,255,0.28); }
+  }
+  
+  /* ---------- Mobile spacing tweaks ---------- */
+  @media (max-width: 576px){
+    .dashboard-hero{ padding: 22px 18px 30px; }
+    .schedule-card{ padding: 14px 14px; }
+    .stat-card{ padding: 12px 10px; }
+  }
+  
+  
