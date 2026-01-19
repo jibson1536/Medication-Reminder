@@ -1,19 +1,31 @@
 from flask import Flask, redirect, url_for
 from flask_login import LoginManager
+from datetime import datetime
+from dotenv import load_dotenv
+import os
+
 from .database import init_db
 
 login_manager = LoginManager()
 
 def create_app():
+    # Load environment variables
+    load_dotenv()
+
     app = Flask(__name__)
-    app.secret_key = "super-secret-key"
+    
+    # Use secret key from .env if available
+    app.secret_key = os.getenv("SECRET_KEY", "super-secret-key")
 
     # Initialize MongoDB
     init_db(app)
 
     # Setup Flask-Login
     login_manager.init_app(app)
-    login_manager.login_view = "auth_bp.login"  # if user not logged in, go to login
+    login_manager.login_view = "auth_bp.login"
+
+    # Make `now()` available in templates for time-based greetings
+    app.jinja_env.globals['now'] = datetime.utcnow
 
     # Import Blueprints
     from .auth_routes import auth_bp
@@ -24,7 +36,7 @@ def create_app():
     from .profile_routes import profile_bp
     from .settings_routes import settings_bp
 
-    # Register blueprints
+    # Register Blueprints
     app.register_blueprint(auth_bp, url_prefix="/auth")
     app.register_blueprint(onboarding_bp, url_prefix="/onboarding")
     app.register_blueprint(med_bp, url_prefix="/med")

@@ -17,22 +17,69 @@ if (medListEl) {
     .then(meds => {
       medListEl.innerHTML = "";
 
-      meds.forEach(med => {
-        medListEl.innerHTML += `
-          <div class="med-item d-flex align-items-center justify-content-between mb-3">
-            <div class="d-flex align-items-center gap-3">
-              <div class="icon-box bg-blue">
-                <i class="bi bi-capsule"></i>
-              </div>
-              <div>
-                <div class="med-title">${med.name}</div>
-                <div class="med-sub">${med.dose} • ${med.freq}</div>
-              </div>
-            </div>
-            <i class="bi bi-three-dots-vertical more-icon"></i>
-          </div>
-        `;
-      });
+meds.forEach(med => {
+  medListEl.innerHTML += `
+    <div class="med-item d-flex align-items-center justify-content-between mb-3">
+      <div class="d-flex align-items-center gap-3">
+        <div class="icon-box bg-blue">
+          <i class="bi bi-capsule"></i>
+        </div>
+        <div>
+          <div class="med-title">${escapeHtml(med.name)}</div>
+          <div class="med-sub">${escapeHtml(med.dose)} • ${escapeHtml(med.freq)}</div>
+        </div>
+      </div>
+
+      <!-- Three-dot dropdown -->
+      <div class="dropdown">
+        <button class="btn btn-sm btn-light"
+                type="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false">
+          <i class="bi bi-three-dots-vertical"></i>
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" href="/med/editmed/${med._id}">
+              <i class="bi bi-pencil me-2"></i>Edit
+            </a>
+          </li>
+          <li>
+            <button class="dropdown-item text-danger" type="button"
+                    onclick="deleteMed('${med._id}')">
+              <i class="bi bi-trash me-2"></i>Delete
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  `;
+});
+// Delete medication via API, then reload the list
+window.deleteMed = async function (medId) {
+  if (!confirm("Delete this medication?")) return;
+
+  const res = await fetch(`/med/api/meds/${medId}`, { method: "DELETE" });
+  const data = await res.json().catch(() => ({}));
+
+  if (res.ok && data.ok) {
+    location.reload(); // simplest refresh
+  } else {
+    alert(data.error || "Delete failed");
+  }
+};
+
+// Basic escaping to avoid HTML injection
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
     })
     .catch(err => {
       console.error(err);
@@ -42,52 +89,7 @@ if (medListEl) {
 
 
 
-  // -------------------------------------
-  // HISTORY (history.html)
-  // -------------------------------------
-  const historyWrapper = document.getElementById("history-js");
-
-  if (historyWrapper) {
-    historyWrapper.innerHTML = `<p>Loading history...</p>`;
-
-    fetch("/api/history")    // <-- matches @profile_bp.route('/api/history')
-      .then(res => {
-        if (!res.ok) throw new Error("Failed to load history");
-        return res.json();
-      })
-      .then(items => {
-        historyWrapper.innerHTML = "";
-
-        items.forEach(item => {
-          const statusClass = item.status.toLowerCase(); // "taken", "missed", etc.
-
-          historyWrapper.innerHTML += `
-            <div class="history-card shadow-sm mb-3 p-3 d-flex justify-content-between align-items-center">
-              <div class="d-flex align-items-center gap-3">
-                <div class="hist-icon ${statusClass}">
-                  ${
-                    item.status === "Taken"
-                      ? '<i class="bi bi-check-circle-fill"></i>'
-                      : '<i class="bi bi-x-circle-fill"></i>'
-                  }
-                </div>
-                <div class="med-info">
-                  <div class="med-name">${item.name}</div>
-                  <div class="med-details">${item.dose} • ${item.time}</div>
-                </div>
-              </div>
-              <span class="status ${statusClass}">${item.status}</span>
-            </div>
-          `;
-        });
-      })
-      .catch(err => {
-        console.error(err);
-        historyWrapper.innerHTML = `<p class="text-danger">Could not load history.</p>`;
-      });
-  }
-
-
+  
 
   // -------------------------------------
   // DASHBOARD (dashboard.html)
