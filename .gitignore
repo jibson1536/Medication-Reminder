@@ -1,2 +1,22 @@
+# macOS
 .DS_Store
+**/.DS_Store
+
+# Python
+__pycache__/
+*.pyc
+
+# Envs
+.env
+venv/
+.venv/
+
+# Node
+node_modules/
+package-lock.json
+
+# VS Code
+.vscode/
+
 .Rhistory
+**/.Rhistory
