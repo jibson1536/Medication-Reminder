@@ -9,15 +9,20 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-  <!-- Page CSS -->
+  <!-- Shared design -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+
+  <!-- History page specific styles -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
 </head>
 
 <body class="bg-light">
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg px-3 universal-nav">
-    <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">Med Reminder</a>
+  <nav class="navbar navbar-expand-lg px-3 topnav">
+    <a class="navbar-brand fw-bold text-white" href="{{ url_for('med_bp.dashboard') }}">
+      Med Reminder
+    </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
       <span class="navbar-toggler-icon"></span>
@@ -25,52 +30,85 @@
 
     <div class="collapse navbar-collapse" id="menu">
       <ul class="navbar-nav ms-auto">
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
-        <li class="nav-item"><a class="nav-link active" href="{{ url_for('profile_bp.history') }}">History</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
-        <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.profile') }}">Profile</a></li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('med_bp.medlist') }}">Med List</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('med_bp.addmed') }}">Add Med</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white fw-bold active" href="{{ url_for('profile_bp.history') }}">History</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('notify_bp.notifications') }}">Notifications</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('settings_bp.settings') }}">Settings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-white" href="{{ url_for('profile_bp.profile') }}">Profile</a>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- PAGE WRAPPER -->
-  <main class="container py-4">
+  <!-- HERO -->
+  <div class="dashboard-hero" style="border-radius: 0 0 24px 24px;">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <div class="hero-greeting">Your weekly progress</div>
+        <div class="hero-name">History</div>
+      </div>
 
-    <!-- BACK LINK -->
-    <a href="{{ url_for('med_bp.dashboard') }}" class="back-link">
-      <i class="bi bi-arrow-left"></i> History
-    </a>
+      <div class="hero-profile">
+        <i class="bi bi-clock-history"></i>
+      </div>
+    </div>
+  </div>
 
-    <!-- WEEK SUMMARY (Dynamic) -->
-    <div class="week-summary shadow-sm">
-      <div class="summary-title">This Week</div>
+  <!-- PAGE CONTENT -->
+  <main class="page-container">
 
-      <div class="summary-grid">
-        <div>
-          <div class="summary-number" id="week-adherence">--%</div>
-          <div class="summary-label">Adherence</div>
+    <!-- BACK + TITLE -->
+    <div class="d-flex align-items-center gap-3 mb-4">
+      <a href="{{ url_for('med_bp.dashboard') }}" class="back-btn">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+      <h4 class="mb-0 fw-bold">History</h4>
+    </div>
+
+    <!-- WEEK SUMMARY -->
+    <div class="history-card-shell week-card mb-4">
+      <div class="week-title">THIS WEEK</div>
+
+      <div class="stats-grid">
+        <div class="stat-box text-center">
+          <div class="stat-number" id="week-adherence">--%</div>
+          <div class="stat-label">Adherence</div>
         </div>
-        <div>
-          <div class="summary-number" id="week-taken">--</div>
-          <div class="summary-label">Taken</div>
+
+        <div class="stat-box text-center">
+          <div class="stat-number" id="week-taken">--</div>
+          <div class="stat-label">Taken</div>
         </div>
-        <div>
-          <div class="summary-number" id="week-missed">--</div>
-          <div class="summary-label">Missed</div>
+
+        <div class="stat-box text-center">
+          <div class="stat-number" id="week-missed">--</div>
+          <div class="stat-label">Missed</div>
         </div>
       </div>
     </div>
 
-    <!-- TODAY (Dynamic) -->
-    <div class="day-section">
-      <div class="day-title">Today</div>
+    <!-- TODAY -->
+    <div class="history-card-shell p-3 p-md-4">
+      <div class="section-title">Today</div>
 
-      <!-- JS will populate -->
+      <!-- JS WILL POPULATE -->
       <div id="today-history-list">
-        <p class="text-muted">Loading...</p>
+        <p class="text-muted mb-0">Loading...</p>
       </div>
     </div>
 
@@ -78,6 +116,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url_for('static', filename='js/history.js') }}"></script>
-
 </body>
 </html>

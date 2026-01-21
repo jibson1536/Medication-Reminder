@@ -1,149 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings - Med Reminder</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Settings - Med Reminder</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <!-- Use index.css so design matches all pages -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}">
 </head>
 
-<body class="bg-white">
+<body>
 
-    <!-- UNIVERSAL NAVBAR -->
-    <nav class="navbar navbar-expand-lg px-3 universal-nav">
-        <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">
-            Med Reminder
-        </a>
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-expand-lg px-3 universal-nav topnav">
+    <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">Med Reminder</a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-        <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.profile') }}">Profile</a></li>
+      </ul>
+    </div>
+  </nav>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.dashboard') }}">Dashboard</a></li>
+  <!-- BLUE HERO TOP BOX -->
+  <div class="dashboard-hero" style="border-radius: 0 0 24px 24px;">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <div class="hero-greeting">Manage your account</div>
+        <div class="hero-name">Settings</div>
+      </div>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.medlist') }}">Med List</a></li>
+      <div class="hero-profile">
+        <i class="bi bi-gear-fill"></i>
+      </div>
+    </div>
+  </div>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('med_bp.addmed') }}">Add Med</a></li>
+  <!-- PAGE CONTENT -->
+  <main class="container py-4" style="max-width: 900px;">
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.history') }}">History</a></li>
+    <!-- SETTINGS CARD -->
+    <div class="p-4 bg-white rounded-4 shadow-sm" style="border: 1px solid rgba(15,23,42,0.08);">
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('notify_bp.notifications') }}">Notifications</a></li>
+      <!-- Account -->
+      <h6 class="text-uppercase fw-bold text-secondary mb-3" style="letter-spacing: .06em;">Account</h6>
 
-                <li class="nav-item"><a class="nav-link active" href="{{ url_for('settings_bp.settings') }}">Settings</a></li>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('profile_bp.profile') }}">
+        <span class="fw-semibold">Profile Information</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-                <li class="nav-item"><a class="nav-link" href="{{ url_for('profile_bp.profile') }}">Profile</a></li>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('settings_bp.change_email') }}">
+        <span class="fw-semibold">Change Email</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            </ul>
-        </div>
-    </nav>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('settings_bp.security') }}">
+        <span class="fw-semibold">Change Password</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-    <!-- CONTENT -->
-    <main class="container py-4">
+      <hr class="my-4">
 
-        <h3 class="mb-4 fw-bold">Settings</h3>
+      <!-- App Settings -->
+      <h6 class="text-uppercase fw-bold text-secondary mb-3" style="letter-spacing: .06em;">App Settings</h6>
 
-        <!-- ACCOUNT SECTION -->
-        <div class="settings-section">
-            <h6 class="settings-title">Account</h6>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('notify_bp.notifications') }}">
+        <span class="fw-semibold">Notifications</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            <div class="settings-item">
-                <span>Profile Information</span>
-                <a href="{{ url_for('profile_bp.profile') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('settings_bp.settings') }}">
+        <span class="fw-semibold">Reminder Sound</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            <div class="settings-item">
-                <span>Change Email</span>
-                <!-- NEW: route to change email page -->
-                <a href="{{ url_for('settings_bp.change_email') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
+      <hr class="my-4">
 
-            <div class="settings-item">
-                <span>Change Password</span>
-                <a href="{{ url_for('settings_bp.security') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
-        </div>
+      <!-- Information -->
+      <h6 class="text-uppercase fw-bold text-secondary mb-3" style="letter-spacing: .06em;">Information</h6>
 
-        <!-- APP SETTINGS -->
-        <div class="settings-section mt-4">
-            <h6 class="settings-title">App Settings</h6>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('settings_bp.privacy_policy') }}">
+        <span class="fw-semibold">Privacy Policy</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            <div class="settings-item">
-                <span>Notifications</span>
-                <a href="{{ url_for('notify_bp.notifications') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-dark"
+         href="{{ url_for('settings_bp.terms_of_service') }}">
+        <span class="fw-semibold">Terms of Service</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            <div class="settings-item">
-                <span>Reminder Sound</span>
-                <!-- NEW: route to reminder sound page -->
-                <a href="{{ url_for('settings_bp.reminder_sound') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
-        </div>
+      <hr class="my-4">
 
-        <!-- INFO -->
-        <div class="settings-section mt-4">
-            <h6 class="settings-title">Information</h6>
+      <!-- Delete Account -->
+      <a class="d-flex justify-content-between align-items-center py-2 text-decoration-none text-danger"
+         href="{{ url_for('settings_bp.delete_account') }}">
+        <span class="fw-bold">Delete Account</span>
+        <i class="bi bi-chevron-right"></i>
+      </a>
 
-            <div class="settings-item">
-                <span>Privacy Policy</span>
-                <!-- NEW: route to privacy policy page -->
-                <a href="{{ url_for('settings_bp.privacy_policy') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
+    </div>
 
-            <div class="settings-item">
-                <span>Terms of Service</span>
-                <!-- NEW: route to terms of service page -->
-                <a href="{{ url_for('settings_bp.terms_of_service') }}" class="settings-arrow">
-                    <i class="bi bi-chevron-right"></i>
-                </a>
-            </div>
-        </div>
+    <!-- LOGOUT BUTTON -->
+    <div class="text-center mt-4">
+      <a href="{{ url_for('auth_bp.logout') }}" class="btn btn-danger px-5 py-2 rounded-pill fw-bold">
+        Log Out
+      </a>
+    </div>
 
-        <!-- DELETE ACCOUNT -->
-        <div class="settings-section mt-4">
-            <!-- use POST with a form for safety -->
-            <form action="{{ url_for('settings_bp.delete_account') }}" method="post"
-                  class="w-100"
-                  onsubmit="return confirm('Are you sure you want to delete your account? This cannot be undone.');">
-                <div class="settings-item text-danger">
-                    <span>Delete Account</span>
-                    <button type="submit" class="settings-arrow btn btn-link text-danger p-0">
-                        <i class="bi bi-chevron-right"></i>
-                    </button>
-                </div>
-            </form>
-        </div>
+  </main>
 
-        <!-- LOGOUT BUTTON -->
-        <div class="mt-5 text-center">
-            <!-- if you have a logout route you can change this to url_for('auth_bp.logout') -->
-            <a href="{{ url_for('auth_bp.login') }}" class="btn btn-danger px-5 py-2 rounded-pill">Log Out</a>
-        </div>
-
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
