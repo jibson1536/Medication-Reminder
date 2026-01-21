@@ -9,14 +9,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
-  <!-- Page CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/history.css') }}">
+  <!-- IMPORTANT: use index.css to keep the old design -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
 </head>
 
-<body class="bg-light">
+<body>
 
   <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg px-3 universal-nav">
+  <nav class="navbar navbar-expand-lg px-3 universal-nav topnav">
     <a class="navbar-brand fw-bold" href="{{ url_for('med_bp.dashboard') }}">Med Reminder</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
@@ -36,40 +36,57 @@
     </div>
   </nav>
 
-  <!-- PAGE WRAPPER -->
+  <!-- BLUE TOP BOX (LIKE BEFORE) -->
+  <div class="dashboard-hero" style="border-radius: 0 0 24px 24px;">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <div class="hero-greeting">Your weekly progress</div>
+        <div class="hero-name">History</div>
+      </div>
+
+      <div class="hero-profile">
+        <i class="bi bi-clock-history"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE CONTENT -->
   <main class="container py-4">
 
-    <!-- BACK LINK -->
-    <a href="{{ url_for('med_bp.dashboard') }}" class="back-link">
-      <i class="bi bi-arrow-left"></i> History
-    </a>
+    <!-- BACK ROW -->
+    <div class="d-flex align-items-center gap-3 mb-3">
+      <a href="{{ url_for('med_bp.dashboard') }}" class="back-btn">
+        <i class="bi bi-arrow-left"></i>
+      </a>
+      <h4 class="mb-0 fw-bold">History</h4>
+    </div>
 
-    <!-- WEEK SUMMARY (Dynamic) -->
-    <div class="week-summary shadow-sm">
-      <div class="summary-title">This Week</div>
+    <!-- WEEK SUMMARY (same IDs, your JS will fill these) -->
+    <div class="notification-card mb-4">
+      <div class="notif-section-title">This Week</div>
 
-      <div class="summary-grid">
-        <div>
-          <div class="summary-number" id="week-adherence">--%</div>
-          <div class="summary-label">Adherence</div>
+      <div class="row text-center mt-3">
+        <div class="col">
+          <div class="stat-number" id="week-adherence">--%</div>
+          <div class="stat-label">Adherence</div>
         </div>
-        <div>
-          <div class="summary-number" id="week-taken">--</div>
-          <div class="summary-label">Taken</div>
+        <div class="col">
+          <div class="stat-number" id="week-taken">--</div>
+          <div class="stat-label">Taken</div>
         </div>
-        <div>
-          <div class="summary-number" id="week-missed">--</div>
-          <div class="summary-label">Missed</div>
+        <div class="col">
+          <div class="stat-number" id="week-missed">--</div>
+          <div class="stat-label">Missed</div>
         </div>
       </div>
     </div>
 
-    <!-- TODAY (Dynamic) -->
-    <div class="day-section">
-      <div class="day-title">Today</div>
+    <!-- TODAY -->
+    <div class="dash-card">
+      <div class="dash-card-title">Today</div>
 
       <!-- JS will populate -->
-      <div id="today-history-list">
+      <div id="today-history-list" class="mt-3">
         <p class="text-muted">Loading...</p>
       </div>
     </div>
@@ -78,6 +95,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   <script src="{{ url_for('static', filename='js/history.js') }}"></script>
-
 </body>
 </html>
