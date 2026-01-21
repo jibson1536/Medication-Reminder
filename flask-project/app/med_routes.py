@@ -143,15 +143,60 @@ def api_update_med(med_id):
 # -----------------------------
 # JSON API: Delete medication (used by editmed.js)
 # -----------------------------
+from bson import ObjectId
+from datetime import datetime
+
 @med_bp.route("/api/meds/<string:med_id>", methods=["DELETE"])
 @login_required
 def api_delete_med(med_id):
     user_id = current_user.get_id()
 
-    mongo.db.medications.delete_one({"_id": ObjectId(med_id), "user_id": user_id})
-    mongo.db.taken_log.delete_many({"user_id": user_id, "med_id": med_id})  # optional cleanup
+    # 1️⃣ Find the medication first
+    med = mongo.db.medications.find_one({
+        "_id": ObjectId(med_id),
+        "user_id": user_id
+    })
+
+    if not med:
+        return jsonify({"ok": False, "error": "Medication not found"}), 404
+
+    # 2️⃣ Add delete metadata
+    med["original_id"] = str(med["_id"])
+    med["deleted_at"] = datetime.utcnow()
+    med["deleted_by"] = user_id
+
+    # 3️⃣ Archive medication
+    mongo.db.deleted_medications.insert_one(med)
+
+    # 4️⃣ Archive taken logs (THIS is the part you asked about)
+    logs = list(mongo.db.taken_log.find({
+        "user_id": user_id,
+        "med_id": med_id
+    }))
+
+    if logs:
+        mongo.db.deleted_taken_log.insert_many([
+            {
+                **log,
+                "deleted_at": datetime.utcnow(),
+                "deleted_by": user_id,
+                "med_original_id": med["original_id"]
+            }
+            for log in logs
+        ])
+
+    # 5️⃣ Delete original records
+    mongo.db.medications.delete_one({
+        "_id": ObjectId(med_id),
+        "user_id": user_id
+    })
+    mongo.db.taken_log.delete_many({
+        "user_id": user_id,
+        "med_id": med_id
+    })
 
     return jsonify({"ok": True})
+
 
 
 # -----------------------------
