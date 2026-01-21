@@ -1,112 +1,208 @@
-/* Blue top bar */
-.top-nav {
-    background: #007bff;
-}
-
-/* Back link */
-.back-link {
-    color: #222;
-    display: flex;
+/* --- Layout helpers --- */
+.page-container {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 26px 20px 70px;
+  }
+  
+  /* Back button */
+  .back-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 999px;
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    font-size: 18px;
+    justify-content: center;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+    color: #0f172a;
     text-decoration: none;
-    margin-bottom: 20px;
-}
-
-/* Week Summary Card */
-.week-summary {
-    background: linear-gradient(to bottom right, #0059d6, #9fbaff);
-    color: white;
+  }
+  .back-btn:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Card base */
+  .history-card-shell {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
     border-radius: 18px;
-    padding: 20px;
-    margin-bottom: 25px;
-}
-
-.summary-title {
-    font-size: 18px;
-    font-weight: 600;
-}
-
-.summary-grid {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-}
-
-.summary-number {
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.summary-label {
-    font-size: 13px;
-    opacity: 0.9;
-}
-
-/* Day sections */
-.day-title {
-    font-weight: bold;
-    font-size: 17px;
-    margin-bottom: 12px;
-}
-
-/* History Cards */
-.history-card {
-    background: white;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  }
+  
+  /* --- Week summary --- */
+  .week-card {
+    padding: 18px 18px 14px;
+  }
+  .week-title {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: rgba(15, 23, 42, 0.55);
+  }
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-top: 14px;
+  }
+  
+  .stat-box {
+    padding: 14px 10px;
     border-radius: 14px;
-    padding: 15px;
-    margin-bottom: 12px;
+    background: rgba(15, 23, 42, 0.03);
+  }
+  
+  .stat-number {
+    font-size: 26px;
+    font-weight: 900;
+    color: #0f172a;
+    line-height: 1;
+  }
+  
+  .stat-label {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(15, 23, 42, 0.55);
+  }
+  
+  /* --- Today list --- */
+  .section-title {
+    font-size: 13px;
+    font-weight: 900;
+    color: rgba(15, 23, 42, 0.7);
+    margin: 10px 0 6px;
+  }
+  
+  /* list wrapper */
+  #today-history-list {
+    margin-top: 10px;
+  }
+  
+  /* item like your screenshot */
+  .today-item {
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 16px;
+    padding: 16px 18px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-}
+    justify-content: space-between;
+    margin: 14px 0;
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+  }
+  
+  .today-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  
+  .today-icon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    color: #ffffff;
+    font-size: 18px;
+  }
+  
+  /* status colors */
+  .today-icon.taken { background: #16a34a; box-shadow: 0 8px 18px rgba(22, 163, 74, 0.25); }
+  .today-icon.missed { background: #ef4444; box-shadow: 0 8px 18px rgba(239, 68, 68, 0.25); }
+  .today-icon.upcoming { background: #2563eb; box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25); }
+  
+  .today-text {
+    min-width: 0;
+  }
+  
+  .today-name {
+    margin: 0;
+    font-weight: 900;
+    font-size: 16px;
+    color: #111827;
+    line-height: 1.15;
+  }
+  
+  .today-meta {
+    margin: 4px 0 0;
+    font-size: 13px;
+    font-weight: 700;
+    color: #6b7280;
+  }
+  
+  /* pill */
+  .today-pill {
+    font-size: 13px;
+    font-weight: 900;
+    padding: 8px 16px;
+    border-radius: 999px;
+    border: 1px solid rgba(15, 23, 42, 0.10);
+    flex: 0 0 auto;
+  }
+  
+  .today-pill.taken { background: #dcfce7; color: #166534; border-color: rgba(22, 101, 52, 0.12); }
+  .today-pill.missed { background: #fee2e2; color: #991b1b; border-color: rgba(153, 27, 27, 0.12); }
+  .today-pill.upcoming { background: #dbeafe; color: #1e40af; border-color: rgba(30, 64, 175, 0.12); }
+  
+  /* Responsive */
+  @media (max-width: 640px) {
+    .stats-grid { grid-template-columns: 1fr; }
+    .today-item { align-items: flex-start; gap: 12px; flex-direction: column; }
+    .today-pill { align-self: flex-start; }
+  }
+  
+  /* ===== TODAY ITEM – FINAL SPACING FIX ===== */
 
-.hist-icon i {
-    font-size: 24px;
-}
-
-.hist-icon.taken i {
-    color: #28a745;
-}
-
-.hist-icon.missed i {
-    color: #dc3545;
-}
-
-.med-name {
+.today-item {
+    padding: 20px 22px;                 /* more breathing room */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  
+  .today-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  
+  /* Text stack */
+  .today-text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+  }
+  
+  .today-name {
+    font-weight: 800;
+    font-size: 16px;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .today-meta {
+    font-size: 13px;
     font-weight: 600;
-}
-
-.med-details {
-    font-size: 13px;
-    color: #555;
-}
-
-/* Status pill */
-.status {
-    font-size: 13px;
-    padding: 4px 10px;
-    border-radius: 20px;
-}
-
-.status.taken {
-    background: #d8f7dd;
-    color: #1b7a31;
-}
-
-.status.missed {
-    background: #fcd7d7;
-    color: #c02d2d;
-}
-
-/* Toggle (three dots) hover button */
-.nav-toggle {
-    border: none;
-    background: none;
-}
-
-.nav-toggle:hover i {
-    opacity: 0.75;
-    cursor: pointer;
-}
+    color: #6b7280;
+  }
+  
+  /* Status pill on RIGHT */
+  .today-pill {
+    margin-left: auto;                  /* pushes it to the right */
+    white-space: nowrap;
+  }
+  
