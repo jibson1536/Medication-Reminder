@@ -3,21 +3,21 @@
 =========================== */
 :root {
     --primary-blue: #01A4FF;
-}
-
-/* ===========================
-   LOGIN WRAPPER (controls overall width)
-=========================== */
-.login-wrapper {
+  }
+  
+  /* ===========================
+     LOGIN WRAPPER (controls overall width)
+  =========================== */
+  .login-wrapper {
     width: 100%;
-    max-width: 700px !important;   /* FINAL FIX: Make wrapper large */
+    max-width: 700px !important;
     margin: 0 auto;
-}
-
-/* ===========================
-   ICON BOX (Blue rounded box)
-=========================== */
-.icon-box {
+  }
+  
+  /* ===========================
+     ICON BOX (Blue rounded box)
+  =========================== */
+  .icon-box {
     width: 78px;
     height: 78px;
     background: var(--primary-blue);
@@ -27,256 +27,252 @@
     align-items: center;
     margin-bottom: 20px;
     box-shadow: 0 4px 12px rgba(1, 164, 255, 0.25);
-}
-
-.icon-img {
+  }
+  
+  .icon-img {
     font-size: 40px;
     color: white !important;
-}
-
-/* ===========================
-   TEXT STYLES
-=========================== */
-.title {
+  }
+  
+  /* ===========================
+     TEXT STYLES
+  =========================== */
+  .title {
     font-size: 28px;
     font-weight: 700;
     color: #000;
-}
-
-.subtitle {
+  }
+  
+  .subtitle {
     font-size: 15px;
     color: #7f8aa3;
-}
-
-/* ===========================
-   CARD (MAIN WIDE CARD STYLE)
-=========================== */
-.login-card {
-    width: 100% !important;         /* Force full width */
-    max-width: 600px !important;    /* FINAL FIX: Big card */
-    margin: 0 auto !important;      /* Center the card */
+  }
+  
+  /* ===========================
+     CARD (MAIN WIDE CARD STYLE)
+  =========================== */
+  .login-card {
+    width: 100% !important;
+    max-width: 600px !important;
+    margin: 0 auto !important;
     border-radius: 24px;
     border: 1px solid #e9edf5;
-    padding: 50px !important;       /* Bigger padding */
+    padding: 50px !important;
     background: #ffffff;
-}
-
-/* ===========================
-   INPUT FIELDS
-=========================== */
-.field-input {
+  }
+  
+  /* ===========================
+     INPUT FIELDS
+  =========================== */
+  .field-input {
     height: 52px;
     border-radius: 14px;
     font-size: 15px;
-    width: 100% !important;         /* FINAL FIX: Full width inputs */
+    width: 100% !important;
     padding-left: 14px;
     border: 1px solid #dce4f2;
-}
-
-.field-input:focus {
+  }
+  
+  .field-input:focus {
     border-color: var(--primary-blue);
     box-shadow: 0 0 0 4px rgba(1, 164, 255, 0.20);
-}
-
-/* ===========================
-   LINKS
-=========================== */
-.forgot-link {
+  }
+  
+  /* ===========================
+     LINKS
+  =========================== */
+  .forgot-link,
+  .signup-link {
+    text-decoration: none;
+    color: var(--primary-blue);
+  }
+  
+  .forgot-link {
     font-size: 13px;
-    text-decoration: none;
-    color: var(--primary-blue);
-}
-
-.signup-link {
-    text-decoration: none;
-    color: var(--primary-blue);
-}
-
-/* ===========================
-   BUTTON
-=========================== */
-.sign-btn {
+  }
+  
+  /* ===========================
+     BUTTON
+  =========================== */
+  .sign-btn {
     height: 50px;
-    border-radius: 999px !important;  /* fully round pill shape */
+    border-radius: 999px !important;
     background: var(--primary-blue) !important;
-    color: white !important;           /* white text */
+    color: white !important;
     font-size: 16px;
     font-weight: 600;
     border: none;
-    width: 100%;                       /* full width */
+    width: 100%;
     transition: 0.2s ease;
-}
-
-.sign-btn:hover {
-    background: #0280cc !important;     /* slightly darker blue hover */
+  }
+  
+  .sign-btn:hover {
+    background: #0280cc !important;
     color: white !important;
-}
-
-
-/* ===========================
-   NAVBAR (blue theme)
-=========================== */
-.navbar {
+  }
+  
+  /* ===========================
+     NAVBAR (Bootstrap navbar theme)
+     (Used in history.html + other pages)
+  =========================== */
+  .navbar {
     background: var(--primary-blue) !important;
-}
-
-.navbar-brand,
-.nav-link {
+  }
+  
+  .navbar-brand,
+  .nav-link {
     color: white !important;
     font-weight: 500;
-}
-
-.nav-link:hover {
-    opacity: 0.85;
-}
-
-/* ===========================
-   MOBILE RESPONSIVE
-=========================== */
-@media (max-width: 480px) {
-
+  }
+  
+  .nav-link:hover {
+    opacity: 0.9;
+  }
+  
+  /* ===========================
+     MOBILE RESPONSIVE (login)
+  =========================== */
+  @media (max-width: 480px) {
     .login-wrapper {
-        padding: 0 20px;
-        max-width: 100% !important;
+      padding: 0 20px;
+      max-width: 100% !important;
     }
-
+  
     .login-card {
-        padding: 30px !important;
-        max-width: 100% !important;   /* Full width on mobile */
+      padding: 30px !important;
+      max-width: 100% !important;
     }
-
+  
     .icon-box {
-        width: 70px;
-        height: 70px;
+      width: 70px;
+      height: 70px;
     }
-
+  
     .icon-img {
-        font-size: 34px;
+      font-size: 34px;
     }
-
+  
     .title {
-        font-size: 24px;
+      font-size: 24px;
     }
-}
-
-
-/* ===========================
-   DASHBOARD
-=========================== */
-
-.dashboard-container {
+  }
+  
+  /* ===========================
+     DASHBOARD
+  =========================== */
+  .dashboard-container {
     padding-bottom: 90px; /* space for floating button */
-}
-
-/* Top hero section */
-.dashboard-hero {
+  }
+  
+  /* Top hero section */
+  .dashboard-hero {
     background: var(--primary-blue);
     color: #fff;
     padding: 28px 24px 36px;
     border-radius: 0 0 24px 24px;
     margin-bottom: 26px;
-}
-
-.hero-greeting {
+  }
+  
+  .hero-greeting {
     font-size: 14px;
-    opacity: 0.8;
-}
-
-.hero-name {
-    font-size: 24px;
-    font-weight: 700;
+    opacity: 0.85;
+  }
+  
+  .hero-name {
+    font-size: 26px;
+    font-weight: 800;
     margin-top: 4px;
-}
-
-/* profile icon */
-.hero-profile {
+  }
+  
+  /* profile icon */
+  .hero-profile {
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255, 255, 255, 0.15);
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.hero-profile i {
+  }
+  
+  .hero-profile i {
     font-size: 20px;
-}
-
-/* next medication card */
-.next-med-card {
+  }
+  
+  /* next medication card */
+  .next-med-card {
     margin-top: 18px;
-    background: rgba(255,255,255,0.12);
+    background: rgba(255, 255, 255, 0.12);
     border-radius: 18px;
     padding: 16px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.next-med-icon {
+  }
+  
+  .next-med-icon {
     width: 40px;
     height: 40px;
     border-radius: 12px;
-    background: rgba(255,255,255,0.18);
+    background: rgba(255, 255, 255, 0.18);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
-}
-
-.next-med-label {
+  }
+  
+  .next-med-label {
     font-size: 13px;
     opacity: 0.85;
-}
-
-.next-med-time {
+  }
+  
+  .next-med-time {
     font-size: 18px;
-    font-weight: 600;
-}
-
-.next-med-drug {
+    font-weight: 700;
+  }
+  
+  .next-med-drug {
     font-size: 13px;
     margin-top: 2px;
-}
-
-.next-med-drug span {
+  }
+  
+  .next-med-drug span {
     opacity: 0.9;
-}
-
-.next-med-btn {
+  }
+  
+  .next-med-btn {
     background: #fff;
     color: #000;
     border-radius: 20px;
     padding: 8px 16px;
     font-size: 13px;
     border: none;
-}
-
-/* stats row */
-.stats-row {
-    margin-top: -18px; /* overlaps slightly like Figma */
-}
-
-.stat-card {
+  }
+  
+  /* stats row */
+  .stats-row {
+    margin-top: -18px;
+  }
+  
+  .stat-card {
     background: #fff;
     border-radius: 18px;
     border: 1px solid #e9edf5;
     padding: 14px 10px;
-}
-
-.stat-number {
+  }
+  
+  .stat-number {
     font-size: 22px;
-    font-weight: 700;
-}
-
-.stat-label {
+    font-weight: 800;
+  }
+  
+  .stat-label {
     font-size: 12px;
     color: #888;
-}
-
-/* schedule */
-.schedule-card {
+  }
+  
+  /* schedule */
+  .schedule-card {
     background: #fff;
     border-radius: 18px;
     border: 1px solid #e9edf5;
@@ -285,34 +281,34 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
-}
-
-.med-name {
+  }
+  
+  .med-name {
     font-size: 15px;
-    font-weight: 600;
-}
-
-.med-meta {
+    font-weight: 700;
+  }
+  
+  .med-meta {
     font-size: 13px;
     color: #999;
-}
-
-.schedule-take-btn {
+  }
+  
+  .schedule-take-btn {
     border-radius: 18px;
     border: 1px solid #dce4f2;
     padding: 6px 16px;
     font-size: 13px;
-}
-
-/* view all link */
-.view-all-link {
+  }
+  
+  /* view all link */
+  .view-all-link {
     font-size: 13px;
     color: var(--primary-blue);
     text-decoration: none;
-}
-
-/* floating add button */
-.fab-add {
+  }
+  
+  /* floating add button */
+  .fab-add {
     position: fixed;
     right: 24px;
     bottom: 24px;
@@ -326,62 +322,56 @@
     justify-content: center;
     font-size: 28px;
     text-decoration: none;
-    box-shadow: 0 8px 20px rgba(1,164,255,0.4);
-}
-/* Medication Icon */
-.med-icon {
+    box-shadow: 0 8px 20px rgba(1, 164, 255, 0.4);
+  }
+  
+  /* Medication Icon */
+  .med-icon {
     font-size: 20px;
-    color: #0096FF;        /* blue theme */
+    color: #0096FF;
     margin-right: 10px;
-}
-
-/* Small circle status icon */
-.small-icon {
+  }
+  
+  /* Small circle status icon */
+  .small-icon {
     font-size: 14px;
     color: #999;
     margin-left: 10px;
-}
-
-/* Style the schedule row */
-.schedule-item {
+  }
+  
+  /* schedule row */
+  .schedule-item {
     background: #fff;
     border: 1px solid #eef2f5;
     padding: 18px 22px;
     border-radius: 14px;
     margin-bottom: 14px;
-}
-
-/* Medicine Name */
-.med-name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-}
-
-/* Take Button */
-.take-btn {
+  }
+  
+  /* Take Button */
+  .take-btn {
     background: #0096FF;
     color: white;
     border: none;
     padding: 8px 20px;
     border-radius: 10px;
-    font-weight: 600;
-}
-/* ===========================
-   ADD MEDICATION PAGE
-=========================== */
-
-.addmed-wrapper {
+    font-weight: 700;
+  }
+  
+  /* ===========================
+     ADD MEDICATION PAGE
+  =========================== */
+  .addmed-wrapper {
     max-width: 900px;
     margin: 40px auto 80px;
-}
-
-/* header row (back arrow + title) */
-.addmed-header {
+  }
+  
+  /* header row (back arrow + title) */
+  .addmed-header {
     margin-bottom: 24px;
-}
-
-.back-btn {
+  }
+  
+  .back-btn {
     width: 36px;
     height: 36px;
     border-radius: 999px;
@@ -392,37 +382,37 @@
     text-decoration: none;
     color: #000;
     background: #ffffff;
-}
-
-.back-btn i {
+  }
+  
+  .back-btn i {
     font-size: 18px;
-}
-
-/* section spacing + labels */
-.addmed-section {
+  }
+  
+  /* section spacing + labels */
+  .addmed-section {
     margin-bottom: 22px;
-}
-
-.form-section-label {
+  }
+  
+  .form-section-label {
     display: block;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 8px;
-}
-
-/* re-use field-input style from login for consistency */
-.addmed-form .field-input {
+  }
+  
+  /* re-use field-input style */
+  .addmed-form .field-input {
     border-radius: 14px;
-}
-
-/* pill options (Tablet, Capsule, etc.) */
-.pill-options {
+  }
+  
+  /* pill options */
+  .pill-options {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-}
-
-.pill-option {
+  }
+  
+  .pill-option {
     border-radius: 999px;
     border: 1px solid #e2e6f0;
     background: #f7f8fc;
@@ -431,63 +421,60 @@
     cursor: pointer;
     min-width: 110px;
     text-align: center;
-}
-
-.pill-option.active {
+  }
+  
+  .pill-option.active {
     background: var(--primary-blue);
     color: #ffffff;
     border-color: var(--primary-blue);
-}
-
-/* small screen tweaks */
-@media (max-width: 576px) {
+  }
+  
+  @media (max-width: 576px) {
     .addmed-wrapper {
-        padding: 0 16px;
-        margin-top: 24px;
+      padding: 0 16px;
+      margin-top: 24px;
     }
-
+  
     .pill-option {
-        flex: 1 1 calc(50% - 10px);
+      flex: 1 1 calc(50% - 10px);
     }
-}
-
-
-/* ===========================
-   MED LIST PAGE
-=========================== */
-/* MED LIST PAGE */
-.medlist-wrapper {
+  }
+  
+  /* ===========================
+     MED LIST PAGE
+  =========================== */
+  .medlist-wrapper {
     max-width: 800px;
-}
-
-.search-bar {
+  }
+  
+  .search-bar {
     position: relative;
-}
-
-.search-input {
+  }
+  
+  .search-input {
     padding-left: 40px;
     height: 48px;
     border-radius: 12px;
     background: #f5f5f7;
     border: none;
-}
-
-.search-icon {
+  }
+  
+  .search-icon {
     position: absolute;
     left: 12px;
     top: 50%;
     transform: translateY(-50%);
     font-size: 19px;
     color: #7a7a7a;
-}
-
-.medlist {
+  }
+  
+  .medlist {
     display: flex;
     flex-direction: column;
     gap: 14px;
-}
-
-.med-item {
+  }
+  
+  .med-item {
     background: #fff;
     border-radius: 16px;
     padding: 15px 18px;
@@ -497,13 +484,13 @@
     border: 1px solid #e7e7e7;
     cursor: pointer;
     transition: 0.15s;
-}
-
-.med-item:hover {
+  }
+  
+  .med-item:hover {
     background: #fafafa;
-}
-
-.icon-box {
+  }
+  
+  .icon-box {
     width: 46px;
     height: 46px;
     border-radius: 12px;
@@ -513,75 +500,65 @@
     font-size: 20px;
     color: white;
     margin-right: 12px;
-}
-
-.bg-blue   { background: #3b82f6; }
-.bg-green  { background: #22c55e; }
-.bg-purple { background: #a855f7; }
-.bg-orange { background: #f97316; }
-
-.med-title {
+  }
+  
+  .bg-blue { background: #3b82f6; }
+  .bg-green { background: #22c55e; }
+  .bg-purple { background: #a855f7; }
+  .bg-orange { background: #f97316; }
+  
+  .med-title {
     font-size: 16px;
-    font-weight: 600;
-}
-
-.med-sub {
+    font-weight: 700;
+  }
+  
+  .med-sub {
     font-size: 13px;
     color: #777;
-}
-
-.more-icon {
+  }
+  
+  .more-icon {
     font-size: 20px;
     color: #777;
-}
-
-
-/* UNIVERSAL NAVBAR */
-.topnav {
+  }
+  
+  /* ===========================
+     UNIVERSAL NAVBAR (topnav)
+     FIX: Removed the "⋮" after every link.
+     If you want a menu icon, add it in HTML instead.
+  =========================== */
+  .topnav {
     background: #1083FF;
     color: white;
-}
-
-.topnav .nav-link {
+  }
+  
+  .topnav .nav-link {
     color: white;
-    opacity: 0.85;
-    font-weight: 500;
+    opacity: 0.88;
+    font-weight: 600;
     transition: 0.2s;
-}
-
-.topnav .nav-link:hover {
+  }
+  
+  .topnav .nav-link:hover {
     opacity: 1;
-}
-
-.topnav .nav-link.active {
-    font-weight: 700;
+  }
+  
+  .topnav .nav-link.active {
+    font-weight: 800;
     opacity: 1;
-}
-
-/* MENU HOVER ICON (3 dots) */
-.nav-link::after {
-    content: "⋮";
-    opacity: 0;
-    margin-left: 8px;
-    transition: 0.2s;
-}
-
-.nav-link:hover::after {
-    opacity: 1;
-}
-
-/* ===========================
-   NOTIFICATION SETTINGS PAGE
-=========================== */
-
-.notification-wrapper {
+  }
+  
+  /* ===========================
+     NOTIFICATION SETTINGS PAGE
+  =========================== */
+  .notification-wrapper {
     max-width: 700px;
     margin-top: 30px;
     margin-bottom: 40px;
-}
-
-/* Top right bell circle */
-.notif-icon-circle {
+  }
+  
+  /* Top right bell circle */
+  .notif-icon-circle {
     width: 44px;
     height: 44px;
     border-radius: 50%;
@@ -589,69 +566,67 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.notif-icon-circle i {
+  }
+  
+  .notif-icon-circle i {
     color: var(--primary-blue);
     font-size: 20px;
-}
-
-/* Main card */
-.notification-card {
+  }
+  
+  /* Main card */
+  .notification-card {
     background: #ffffff;
     border-radius: 20px;
     border: 1px solid #e5edf7;
     padding: 24px 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.03);
-}
-
-/* Sections inside card */
-.notif-section-title {
+  }
+  
+  /* Sections inside card */
+  .notif-section-title {
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     color: #7f8aa3;
     margin-bottom: 10px;
-}
-
-.notif-row {
+  }
+  
+  .notif-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
     padding: 10px 0;
     border-bottom: 1px solid #f0f3fb;
-}
-
-.notif-row:last-child {
+  }
+  
+  .notif-row:last-child {
     border-bottom: none;
-}
-
-.notif-label {
+  }
+  
+  .notif-label {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 600;
     color: #111827;
-}
-
-.notif-sub {
+  }
+  
+  .notif-sub {
     font-size: 13px;
     color: #9ca3af;
-}
-
-/* Selects on the right */
-.notif-select {
+  }
+  
+  .notif-select {
     max-width: 180px;
     font-size: 14px;
     border-radius: 12px;
-}
-
-/* Small tweak for switches */
-.form-check-input {
+  }
+  
+  .form-check-input {
     cursor: pointer;
-}
-
-.next-up-highlight {
+  }
+  
+  .next-up-highlight {
     border: 2px solid #4aa3ff !important;
     border-radius: 12px;
     box-shadow: 0 0 8px rgba(74, 163, 255, 0.4);
@@ -659,7 +634,7 @@
   
   .next-up-text {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     color: #007bff;
     margin-top: 3px;
   }
